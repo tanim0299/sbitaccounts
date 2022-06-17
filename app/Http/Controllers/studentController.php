@@ -35,4 +35,9 @@ class studentController extends Controller
 
         echo $total_value; 
     }
+
+    public function store(Request $request)
+    {
+        dd($request->all());
+    }
 }

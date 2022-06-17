@@ -199,7 +199,36 @@
     });
 
 
+
+    
+        
+    
+
+
    });
+
+
+   $(document).ready(function(){
+
+    $("#discount_ammount").on('keyup',function(){
+
+        var main_fee = parseInt($("#main_fee").val());
+
+        var discount_ammount = parseInt($("#discount_ammount").val());
+
+        var discount_percentage = (discount_ammount/main_fee * 100);
+
+        var sign = "%";
+
+        $("#discount_per").val(discount_percentage.toFixed(0)+sign);
+
+        // alert();
+
+    });
+
+   });
+
+
 
 
    

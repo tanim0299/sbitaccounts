@@ -52,7 +52,7 @@
                         <strong>{{Session::get('error')}}</strong>
                 </div>
                 @endif
-            <form method="POST" enctype="multipart/form-data" action="{{url('/registerAdmin')}}">
+            <form method="POST" enctype="multipart/form-data" action="{{url('/studentStore')}}">
                 @csrf
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-12">
@@ -201,7 +201,7 @@
                             @foreach($course as $showcourse)
                             <div class="checkbox-fade fade-in-primary">
                                 <label>
-                                <input onclick="courseFee({{$showcourse->id}})" id="course_id-{{$showcourse->id}}" type="checkbox" value="{{$showcourse->id}}">
+                                <input onclick="courseFee({{$showcourse->id}})" id="course_id-{{$showcourse->id}}" type="checkbox" value="{{$showcourse->id}}" name="course_id[]">
                                 <span class="cr">
                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                 </span>
@@ -222,6 +222,12 @@
                         <div class="input-single-box">
                             <label>Discount</label>
                             <input type="text" name="discount" class="form-control" onkeyup="discount()" id="discount_ammount">
+                        </div>
+                    </div>
+                    <div class="col-lg-6 col-md-6 col-12">
+                        <div class="input-single-box">
+                            <label>Discount Percentage</label>
+                            <input type="text" name="discount_per" class="form-control" readonly id="discount_per">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">

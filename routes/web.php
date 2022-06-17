@@ -62,3 +62,4 @@ Route::get('/courseDelete/{id}',[App\Http\Controllers\courseController::class, '
 Route::get('/addStudent',[App\Http\Controllers\studentController::class, 'index']);
 Route::post('/getCourseFee',[App\Http\Controllers\studentController::class, 'getCourseFee']);
 Route::post('/subCourseFee',[App\Http\Controllers\studentController::class, 'subCourseFee']);
+Route::post('/studentStore',[App\Http\Controllers\studentController::class, 'store']);
