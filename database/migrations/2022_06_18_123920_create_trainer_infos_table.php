@@ -20,9 +20,9 @@ class CreateTrainerInfosTable extends Migration
             $table->string('trainer_name');
             $table->string('phone',20);
             $table->string('designation',50);
-            $table->longText('adress');
+            $table->longText('adress')->nullable();
             $table->string('status',10);
-            $table->string('image',200);
+            $table->string('image',200)->nullable();
             $table->string('admin_id',20);
             $table->timestamps();
         });

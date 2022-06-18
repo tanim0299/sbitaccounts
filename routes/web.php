@@ -73,3 +73,7 @@ Route::get('/deleteStudent/{id}',[App\Http\Controllers\studentController::class,
 // trainer information
 Route::get('/addTrainer',[App\Http\Controllers\trainerController::class, 'index']);
 Route::post('/trainerStore',[App\Http\Controllers\trainerController::class, 'store']);
+Route::get('/viewTrainer',[App\Http\Controllers\trainerController::class, 'view']);
+Route::get('/editTrainer/{id}',[App\Http\Controllers\trainerController::class, 'edit']);
+Route::post('/trainerUpdate/{id}',[App\Http\Controllers\trainerController::class, 'update']);
+Route::get('/deleteTrainer/{id}',[App\Http\Controllers\trainerController::class, 'delete']);

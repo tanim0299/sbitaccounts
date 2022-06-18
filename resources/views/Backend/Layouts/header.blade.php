@@ -277,7 +277,7 @@ $sub_menu = DB::table('sub_menu')
 @endphp
 @if($main_menu)
 @foreach($main_menu as $show_mainmenu)
-<li class="pcoded-hasmenu">
+<li class="pcoded-hasmenu" id="main_link">
 <a href="javascript:void(0)" class="waves-effect waves-dark">
 <span class="pcoded-micon">
 <i class="feather icon-box"></i>
@@ -288,7 +288,7 @@ $sub_menu = DB::table('sub_menu')
 @if($sub_menu)
 @foreach($sub_menu as $show_submenu)
 @if($show_mainmenu->id == $show_submenu->main_menuid)
-<li class="">
+<li class="" id="sublink">
 <a href="{{$show_submenu->route_name}}" class="waves-effect waves-dark">
 <span class="pcoded-mtext">{{$show_submenu->submenu_name}}</span>
 </a>

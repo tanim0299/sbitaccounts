@@ -235,6 +235,19 @@
 
 </script>
 
+
+<script type="text/javascript">
+    $("#main_link").click(function(){
+        $('#main_link').removeClass('active');
+        $('#main_link').addClass('active');
+    }); 
+
+    $("#sub_link").click(function(){
+        $('#sub_link').removeClass('active');
+        $('#sub_link').addClass('active');
+    });
+</script>
+
 </body>
 
 <!-- Mirrored from demo.dashboardpack.com/admindek-html/default/dashboard-crm.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 14 Jun 2022 06:17:14 GMT -->
