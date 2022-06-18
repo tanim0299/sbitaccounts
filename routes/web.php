@@ -63,3 +63,13 @@ Route::get('/addStudent',[App\Http\Controllers\studentController::class, 'index'
 Route::post('/getCourseFee',[App\Http\Controllers\studentController::class, 'getCourseFee']);
 Route::post('/subCourseFee',[App\Http\Controllers\studentController::class, 'subCourseFee']);
 Route::post('/studentStore',[App\Http\Controllers\studentController::class, 'store']);
+Route::get('/viewStudent',[App\Http\Controllers\studentController::class, 'view']);
+Route::get('/showForm/{id}',[App\Http\Controllers\studentController::class, 'showForm']);
+Route::get('/editStudent/{id}',[App\Http\Controllers\studentController::class, 'edit']);
+Route::post('/studentUpdate/{id}',[App\Http\Controllers\studentController::class, 'update']);
+Route::get('/deleteStudent/{id}',[App\Http\Controllers\studentController::class, 'delete']);
+
+
+// trainer information
+Route::get('/addTrainer',[App\Http\Controllers\trainerController::class, 'index']);
+Route::post('/trainerStore',[App\Http\Controllers\trainerController::class, 'store']);

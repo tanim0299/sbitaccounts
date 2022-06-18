@@ -52,32 +52,27 @@
                         <strong>{{Session::get('error')}}</strong>
                 </div>
                 @endif
-            <form method="POST" enctype="multipart/form-data" action="{{url('/studentStore')}}">
+                @if($data)
+            <form method="POST" enctype="multipart/form-data" action="{{url('/studentUpdate')}}/{{$data->id}}">
                 @csrf
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
                             <label>Date</label>
-                            <input name="date" id="dropper-animation" class="form-control" type="text" placeholder="Select your Date" required>
-                            <!-- <div class="checkbox-fade fade-in-primary">
-                                <label>
-                                <input type="checkbox" value="">
-                                <span class="cr">
-                                <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
-                                </span>
-                                <span>Primary</span>
-                                </label>
-                            </div> -->
-
-
+                            <input name="date" id="dropper-animation" class="form-control" type="text" placeholder="Select your Date" required value="{{$data->date}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
                             <label>Student Type</label><br>
                             <select class="form-control" name="type" required>
-                                <option value="Regular">Regular</option>
+                                @if($data->type == 'Regular')
+                                <option selected value="Regular">Regular</option>
                                 <option value="Industrial">Industrial</option>
+                                @elseif($data->type == 'Industrial')
+                                <option value="Regular">Regular</option>
+                                <option selected value="Industrial">Industrial</option>
+                                @endif
                             </select>
                         </div>
                     </div>
@@ -89,65 +84,91 @@
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
                             <label>Student Name</label>
-                            <input type="text" name="name" class="form-control" required>
+                            <input type="text" name="name" class="form-control" required value="{{$data->name}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
                             <label>Fathers Name</label>
-                            <input type="text" name="fathers_name" class="form-control" required>
+                            <input type="text" name="fathers_name" class="form-control" required value="{{$data->fathers_name}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
                             <label>Mothers Name</label>
-                            <input type="text" name="mothers_name" class="form-control" required>
+                            <input type="text" name="mothers_name" class="form-control" required value="{{$data->mothers_name}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
                             <label>Gender</label><br>
                             <select class="form-control" name="gender">
-                                <!-- <option value="0">Select One</option> -->
-                                <option value="Male">Male</option>
+                                @if($data->gender == 'Male')
+                                <option selected value="Male">Male</option>
                                 <option value="Female">Female</option>
                                 <option value="Others">Others</option>
+                                @elseif($data->gender == 'Female')
+                                <option value="Male">Male</option>
+                                <option selected value="Female">Female</option>
+                                <option value="Others">Others</option>
+                                @elseif($data->gender == 'Others')
+                                <option value="Male">Male</option>
+                                <option value="Female">Female</option>
+                                <option selected value="Others">Others</option>
+                                @endif
                             </select>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
                             <label>Nationality</label>
-                            <input type="text" name="nationality" class="form-control" value="Bangladeshi">
+                            <input type="text" name="nationality" class="form-control" value="{{$data->nationality}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
                             <label>Religion</label>
                             <select class="form-control" name="religion">
-                                <option value="Islam">Islam</option>
+                                @if($data->religion == 'Islam')
+                                <option selected value="Islam">Islam</option>
                                 <option value="Hindu">Hindu</option>
                                 <option value="Buddist">Buddist</option>
                                 <option value="Chiristian">Chiristian</option>
+                                @elseif($data->religion == 'Hindu')
+                                <option value="Islam">Islam</option>
+                                <option selected value="Hindu">Hindu</option>
+                                <option value="Buddist">Buddist</option>
+                                <option value="Chiristian">Chiristian</option>
+                                @elseif($data->religion == 'Buddist')
+                                <option value="Islam">Islam</option>
+                                <option value="Hindu">Hindu</option>
+                                <option selected value="Buddist">Buddist</option>
+                                <option value="Chiristian">Chiristian</option>
+                                @elseif($data->religion == 'Chiristian')
+                                <option value="Islam">Islam</option>
+                                <option value="Hindu">Hindu</option>
+                                <option value="Buddist">Buddist</option>
+                                <option selected value="Chiristian">Chiristian</option>
+                                @endif
                             </select>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
                             <label>Insititute Name</label>
-                            <input type="text" name="institute" class="form-control">
+                            <input type="text" name="institute" class="form-control" value="{{$data->institute}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
                             <label>Technology/Group</label>
-                            <input type="text" name="group" class="form-control">
+                            <input type="text" name="group" class="form-control" value="{{$data->group}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
                             <label>Semister/Year</label>
-                            <input type="text" name="semister" class="form-control">
+                            <input type="text" name="semister" class="form-control" value="{{$data->semister}}">
                         </div>
                     </div>
                     <div class="card-header col-12">
@@ -156,39 +177,38 @@
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
                             <label>Phone</label>
-                            <input type="text" name="phone" class="form-control" required>
+                            <input type="text" name="phone" class="form-control" required value="{{$data->phone}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
                             <label>Email</label>
-                            <input type="email" name="email" class="form-control">
+                            <input type="email" name="email" class="form-control" value="{{$data->email}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
                             <label>District</label>
-                            <input type="text" name="district" class="form-control" required>
+                            <input type="text" name="district" class="form-control" required value="{{$data->district}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
                             <label>Upazila</label>
-                            <input type="text" name="upazila" class="form-control">
+                            <input type="text" name="upazila" class="form-control" value="{{$data->upazila}}">
                         </div>
                     </div>
                     <div class="col-lg-12 col-md-12 col-12">
                         <div class="input-single-box">
                             <label>Adress</label>
-                            <textarea class="form-control" name="adress">
-                                
-                            </textarea>
+                            <textarea class="form-control" name="adress">{{$data->adress}}</textarea>
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
                             <label>Image</label>
                             <input type="file" name="image" class="form-control">
+                            <img src="{{asset('public/public/Backend')}}/Images/studentImage/{{$data->image}}" height="70px" width="70px" style="border-radius:100px;">
                         </div>
                     </div>
                     <div class="card-header col-12">
@@ -199,9 +219,17 @@
                             <label><h3>Select Course</h3></label><br>
                             @if($course)
                             @foreach($course as $showcourse)
+                            @php
+                            $course_id = DB::table('student_course_info')
+                                         ->where('course_id',$showcourse->id)
+                                         ->where('student_id',$data->id)
+                                         ->pluck('course_id')
+                                         ->first();
+
+                            @endphp
                             <div class="checkbox-fade fade-in-primary">
                                 <label>
-                                <input onclick="courseFee({{$showcourse->id}})" id="course_id-{{$showcourse->id}}" type="checkbox" value="{{$showcourse->id}}" name="course_id[]">
+                                <input  onclick="courseFee({{$showcourse->id}})" id="course_id-{{$showcourse->id}}" type="checkbox" value="{{$showcourse->id}}" name="course_id[]" @if($course_id == $showcourse->id) checked @endif>
                                 <span class="cr">
                                 <i class="cr-icon icofont icofont-ui-check txt-primary"></i>
                                 </span>
@@ -215,25 +243,25 @@
                     <div class="col-lg-6 col-md-6 col-12" id="fee">
                         <div class="input-single-box">
                             <label>Course Fee</label>
-                            <input type="text" name="main_fee" class="form-control" readonly id="main_fee">
+                            <input type="text" name="main_fee" class="form-control" readonly id="main_fee" value="{{$data->main_fee}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
                             <label>Discount</label>
-                            <input type="text" name="discount" class="form-control" onkeyup="discount()" id="discount_ammount">
+                            <input type="text" name="discount" class="form-control" onkeyup="discount()" id="discount_ammount" value="{{$data->discount}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
                             <label>Discount Percentage</label>
-                            <input type="text" name="discount_per" class="form-control" readonly id="discount_per">
+                            <input type="text" name="discount_per" class="form-control" readonly id="discount_per" value="{{$data->discount_per}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
                             <label>Total Ammount</label>
-                            <input type="text" name="total_fee" class="form-control" readonly id="total_fee">
+                            <input type="text" name="total_fee" class="form-control" readonly id="total_fee" value="{{$data->total_fee}}">
                         </div>
                     </div>
 
@@ -243,15 +271,21 @@
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
                             <label>Join Date</label>
-                            <input name="join_date" id="dropper-default" class="form-control" type="text" placeholder="Select your Date" required>
+                            <input name="join_date" id="dropper-default" class="form-control" type="text" placeholder="Select your Date" required value="{{$data->join_date}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
                             <label>Class Time</label>
                             <select class="form-control" name="class_time">
-                                <option value="Morning">Morning</option>
+                                @if($data->class_time == 'Morning')
+                                <option selected value="Morning">Morning</option>
                                 <option value="Afternoon">Afternoon</option>
+                                @elseif($data->class_time == 'Afternoon')
+                                <option value="Morning">Morning</option>
+                                <option selected value="Afternoon">Afternoon</option>
+                                @endif
+                                
                             </select>
                         </div>
                     </div>
@@ -261,6 +295,7 @@
                     <input type="submit" name="submit" class="btn btn-success btn-block">
                 </div>
             </form>
+            @endif
         </div>
     </div> 
  </div>

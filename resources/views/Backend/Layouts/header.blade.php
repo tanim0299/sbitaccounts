@@ -64,7 +64,7 @@
 
 <link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/bower_components/bootstrap-tagsinput/css/bootstrap-tagsinput.css" />
 
-<link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/assets/css/style.css"><link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/assets/css/pages.css">
+<!-- <link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/assets/css/style.css"><link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/assets/css/pages.css"> -->
 
 <link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/assets/pages/notification/notification.css">
 
