@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use Illuminate\Http\Request;
 use DB;
 use App\Models\course_info;
+use PDF;
 // use App\Models\course_info;
 
 class studentController extends Controller
@@ -39,9 +40,12 @@ class studentController extends Controller
 
     public function store(Request $request)
     {
+
+
         // dd($request->all());
         $array_data = array(
 
+            'unique_id'=>rand(),
             'date'=>$request->date,
             'type'=>$request->type,
             'name'=>$request->name,
@@ -69,6 +73,8 @@ class studentController extends Controller
         );
 
         $insert = DB::table('student_info')->insertGetId($array_data);
+        $insertImageNum = DB::table('student_info')->where('id',$insert)->update(['image'=>'1.jpg','due'=>$request->total_fee]);
+
 
         if($insert)
         {
@@ -151,12 +157,13 @@ class studentController extends Controller
             'join_date'=>$request->join_date,
             'class_time'=>$request->class_time,
             'admin_id'=>$request->admin_id,
-            'image'=>"1",
         );
-
+        // DB::table('student_info')->where('id',$id)->update(['image'=>'1.jpg']);
         // dd($array_data);
 
         DB::table('student_course_info')->where('student_id',$id)->delete();
+
+        // $insert = DB::table('student_info')->where('id',$id)->update($array_data);
 
         for ($i=0; $i < count($request->course_id) ; $i++) 
         { 
@@ -168,9 +175,6 @@ class studentController extends Controller
         }
 
         $insert = DB::table('student_info')->where('id',$id)->update($array_data);
-
-        if($insert)
-        {
 
         $file = $request->file('image');
 
@@ -193,29 +197,213 @@ class studentController extends Controller
             $file->move(public_path('public/Backend/images/studentImage'),$imageName);
 
             DB::table('student_info')->where('id',$id)->update(['image'=>$imageName]);
-        }
 
+            // return $imageName;
+        }
+        
+
+        // if($insert)
+        // {
         
             return redirect()->back()->with('success','Student Data Update Successfully!');
-        }
+        
+        // else
+        // {
+        //     return redirect()->back()->with('error','Student Data Update Unsuccessfully!');
+        // }
 
     }
 
     public function delete($id)
     {
-        DB::table('student_course_info')->where('student_id',$id)->delete();
 
-        $pathImage = DB::table('student_info')->where('id',$id)->first();
-
-        $path = base_path().'/public/public/Backend/images/studentImage/'.$pathImage->image;
-
-        if(file_exists($path))
+        $trainer_check = DB::table('trainer_appoint')->where('student_id',$id)->get();
+        $collection_check = DB::table('student_collection')->where('student_id',$id)->get();
+        if(count($trainer_check) > 0)
         {
-            unlink($path);
+            return redirect()->back()->with('error','This Student Have Trainer');
+        }
+        elseif(count($collection_check) > 0)
+        {
+            return redirect()->back()->with('error','This Student Have Collection');
+        }
+        else
+        {
+            DB::table('student_course_info')->where('student_id',$id)->delete();
+
+            $pathImage = DB::table('student_info')->where('id',$id)->first();
+
+            $path = base_path().'/public/public/Backend/images/studentImage/'.$pathImage->image;
+
+            if(file_exists($path))
+            {
+                unlink($path);
+            }
+
+            DB::table("student_info")->where('id',$id)->delete();
+
+            return redirect()->back()->with('success','Data Delete Successfully!');
+        }
+    }
+
+    public function idCard()
+    {
+        return view('Backend.User.StudentInfo.id_card');
+    }
+    public function details($id)
+    {
+        $data=DB::table('student_info')->where('id',$id)->first();
+       return view('Backend.User.StudentInfo.details',compact('data')); 
+    }
+
+    public function completeCourse($id,$course_id)
+    {
+        $update = DB::table('student_course_info')
+                  ->where('student_id',$id)
+                  ->where('course_id',$course_id)
+                  ->update(['status'=>'1']);
+
+        if($update)
+        {
+            return redirect()->back()->with('success','Course Completed...Get Certificate From The Button Given Below');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Something Went Wrong');
+        }
+    }
+
+    public function trainerSearch()
+    {
+        $student = DB::table('student_info')->get();
+        return view('Backend.User.StudentInfo.trainer_search',compact('student'));
+    }
+
+    public function getTrainer(Request $request)
+    {
+        // return $request->id;
+
+        $course_info = DB::table('student_course_info')
+                        ->join('course_infos','course_infos.id','student_course_info.course_id')
+                       ->where('student_id',$request->id)
+                       ->select('course_infos.course_name','course_infos.id')
+                       ->get();
+
+        return view('Backend.User.StudentInfo.trainer_search_result',compact('course_info'));
+    }
+
+    public function trainerAppoint(Request $request)
+    {
+        // return $request->all();
+        // dd($request->all());
+
+        // return count($request->trainer_id);
+
+        // return ;
+
+        if(count($request->trainer_id) > count($request->course_id))
+        {
+           return redirect()->back()->with('error','Pleas Select One Trainer Per Course'); 
+        }
+        else
+        {
+            for ($i=0; $i < count($request->course_id) ; $i++) 
+            { 
+                $insert = DB::table('trainer_appoint')
+                          ->insert([
+                         'student_id'=>$request->student_id,
+                            'course_id'=>$request->course_id[$i],
+                            'trainer_id'=>$request->trainer_id[$i],
+                     ]);
+            }
+
+            if($insert)
+             {
+                return redirect()->back()->with('success','Trainer Appoint Successfully');
+             }
+             else
+             {
+                return redirect()->back()->with('error','Trainer Appoint Failed');
+             }
         }
 
-        DB::table("student_info")->where('id',$id)->delete();
+        
+    }
 
-        return redirect()->back()->with('success','Data Delete Successfully!');
+    public function viewStdTrainer()
+    {
+        $student = DB::table('student_info')->get();
+        return view("Backend.User.StudentInfo.std_trainer",compact('student'));
+    }
+
+    public function getstdTrainer(Request $request)
+    {
+        $id = $request->id;
+
+        $course_info = DB::table('trainer_appoint')
+                        ->join('course_infos','course_infos.id','trainer_appoint.course_id')
+                       ->where('student_id',$id)
+                       ->select('course_infos.course_name','course_infos.id')
+                       ->get();
+
+        // dd($course_info);
+
+        return view('Backend.User.StudentInfo.stdtrainer_search_result',compact('course_info','id'));
+    }
+
+    public function deleteAppTrainer($id)
+    {
+        $delete = DB::table('trainer_appoint')
+                  ->where('student_id',$id)
+                  ->delete();
+
+        if($delete)
+        {
+            return redirect()->back()->with('success','Trainer Appoint Removed');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Something Went Wrong!');
+        }
+    }
+
+    public function downloadForm($id)
+    {
+        // $student_name = DB::table('student_info')->where('id',$id)->select('student_info.name')->get();
+
+        $data = DB::table('student_info')->where('id',$id)->first();
+        // // return $pdf
+        $pdf = PDF::loadView('Backend.User.StudentInfo.form_download',compact('data'))
+                ->setPaper('A4', 'portrait')
+                ->setOptions([
+                    'defaultFont' => 'sans-serif',
+                     // 'enable_remote' => true,
+                    // 'chroot'  => public_path('/public/Backend'),
+
+            ]);
+
+        // return view('Backend.User.StudentInfo.form_download',compact('data'));
+
+
+        return $pdf->stream($data->name.'.pdf');
+    }
+
+    public function id_card($id)
+    {
+        $data = DB::table('student_info')->where('id',$id)->first();
+        return view('Backend.User.StudentInfo.id_card',compact('data'));
+    }
+
+    public function download_id($id)
+    {
+       $data = DB::table('student_info')->where('id',$id)->first();
+       
+       $pdf = PDF::loadView('Backend.User.StudentInfo.id_download',compact('data'))
+              ->setPaper('A4','portrait')
+              ->setOptions([
+                'defaultFont'=>'sans-serif',
+              ]);
+
+        return $pdf->download($data->name.'.pdf');
     }
 }

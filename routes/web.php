@@ -68,6 +68,28 @@ Route::get('/showForm/{id}',[App\Http\Controllers\studentController::class, 'sho
 Route::get('/editStudent/{id}',[App\Http\Controllers\studentController::class, 'edit']);
 Route::post('/studentUpdate/{id}',[App\Http\Controllers\studentController::class, 'update']);
 Route::get('/deleteStudent/{id}',[App\Http\Controllers\studentController::class, 'delete']);
+Route::get('/searchTrainer',[App\Http\Controllers\studentController::class, 'trainerSearch']);
+Route::post('/getTrainer',[App\Http\Controllers\studentController::class, 'getTrainer']);
+Route::post('/trainerAppoint',[App\Http\Controllers\studentController::class, 'trainerAppoint']);
+Route::get('/viewStdTrainer',[App\Http\Controllers\studentController::class, 'viewStdTrainer']);
+Route::post('/getstdTrainer',[App\Http\Controllers\studentController::class, 'getstdTrainer']);
+Route::get('/deleteAppTrainer/{id}',[App\Http\Controllers\studentController::class, 'deleteAppTrainer']);
+Route::get('/id_card/',[App\Http\Controllers\studentController::class, 'idCard']);
+Route::get('/details/{id}',[App\Http\Controllers\studentController::class, 'details']);
+Route::get('/complete_course/{id}/{course_id}',[App\Http\Controllers\studentController::class, 'completeCourse']);
+Route::get('/id_card/{id}',[App\Http\Controllers\studentController::class, 'id_card']);
+
+
+Route::get('/downloadForm/{id}',[App\Http\Controllers\studentController::class, 'downloadForm']);
+Route::get('/download_id/{id}',[App\Http\Controllers\studentController::class, 'download_id']);
+
+
+// student collection
+Route::get('/addCollection',[App\Http\Controllers\studentCollectionController::class, 'index']);
+Route::post('/getStudentFee',[App\Http\Controllers\studentCollectionController::class, 'getStudentFee']);
+Route::post('/collectionStore',[App\Http\Controllers\studentCollectionController::class, 'store']);
+Route::get('/viewStdcollection',[App\Http\Controllers\studentCollectionController::class, 'view']);
+Route::get('/deleteCollection/{id}/{student_id}',[App\Http\Controllers\studentCollectionController::class, 'delete']);
 
 
 // trainer information

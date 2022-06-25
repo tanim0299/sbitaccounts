@@ -39,7 +39,8 @@
 
 <link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/bower_components/datatables.net-bs4/css/dataTables.bootstrap4.min.css">
 <link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/assets/pages/data-table/css/buttons.dataTables.min.css">
-<!-- <link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css"> -->
+
+<link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/bower_components/datatables.net-responsive-bs4/css/responsive.bootstrap4.min.css">
 
 
 <link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/assets/pages/advance-elements/css/bootstrap-datetimepicker.css">
@@ -52,25 +53,19 @@
 
 <link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/bower_components/jquery-minicolors/css/jquery.minicolors.css" />
 
+<link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/assets/css/pages.css">
 
 
 <link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/assets/icon/themify-icons/themify-icons.css">
 
 <link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/assets/icon/icofont/css/icofont.css">
 
-<link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/assets/icon/font-awesome/css/font-awesome.min.css">
+<!-- <link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/assets/icon/font-awesome/css/font-awesome.min.css"> -->
 
 <link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/bower_components/switchery/css/switchery.min.css">
 
-<link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/bower_components/bootstrap-tagsinput/css/bootstrap-tagsinput.css" />
+<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
-<!-- <link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/assets/css/style.css"><link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/assets/css/pages.css"> -->
-
-<link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/assets/pages/notification/notification.css">
-
-<link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/bower_components/animate.css/css/animate.css">
-
-<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/uikit@3.14.3/dist/css/uikit.min.css" /> -->
 
 
 
@@ -110,6 +105,40 @@
 	.dropdown-toggle img {
     height: 56px;
     width: 56px !important;
+}
+span#select2-student_id-qc-container {
+    background: white !important;
+    border: 1px solid lightgray;
+}
+.course_box {
+    background: #f9eeee;
+    padding: 0px;
+    border-top: 2px solid black;
+    margin-top: 32px;
+    border-radius: 5px;
+    border: 1px solid lightgray;
+}
+
+.title {
+    background: #3c6ddb;
+    color: white;
+    padding: 5px 14px;
+}
+.trainer_single li {
+    list-style: none;
+    background: whtie !important;
+    background-color: white;
+    border-bottom: 1px solid lightgray;
+    padding: 12px 10px;
+}
+
+.trainer_single li img {
+    margin-left: 7px;
+}
+
+.trainer_single li span {
+    margin-left: 12px;
+    /* padding-left: 6px; */
 }
 </style>
 <body>
@@ -268,7 +297,7 @@
 <div class="pcoded-navigation-label">Others Links</div>
 <ul class="pcoded-item pcoded-left-item">
 @php 
-$main_menu = DB::table('main_menu')->get()->where('status','1');
+$main_menu = DB::table('main_menu')->orderBy('sl','ASC')->get()->where('status','1');
 $sub_menu = DB::table('sub_menu')
 			->join('main_menu','main_menu.id','=','sub_menu.main_menuid')
 			->select('main_menu.link_name','sub_menu.*')
@@ -289,7 +318,7 @@ $sub_menu = DB::table('sub_menu')
 @foreach($sub_menu as $show_submenu)
 @if($show_mainmenu->id == $show_submenu->main_menuid)
 <li class="" id="sublink">
-<a href="{{$show_submenu->route_name}}" class="waves-effect waves-dark">
+<a href="{{url($show_submenu->route_name)}}" class="waves-effect waves-dark">
 <span class="pcoded-mtext">{{$show_submenu->submenu_name}}</span>
 </a>
 </li>

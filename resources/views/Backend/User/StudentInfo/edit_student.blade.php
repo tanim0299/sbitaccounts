@@ -208,7 +208,7 @@
                         <div class="input-single-box">
                             <label>Image</label>
                             <input type="file" name="image" class="form-control">
-                            <img src="{{asset('public/public/Backend')}}/Images/studentImage/{{$data->image}}" height="70px" width="70px" style="border-radius:100px;">
+                            <img src="{{asset('public/public/Backend')}}/images/studentImage/{{$data->image}}" height="70px" width="70px" style="border-radius:100px;">
                         </div>
                     </div>
                     <div class="card-header col-12">
@@ -243,7 +243,7 @@
                     <div class="col-lg-6 col-md-6 col-12" id="fee">
                         <div class="input-single-box">
                             <label>Course Fee</label>
-                            <input type="text" name="main_fee" class="form-control" readonly id="main_fee" value="{{$data->main_fee}}">
+                            <input type="text" name="main_fee" class="form-control" id="main_fee" value="{{$data->main_fee}}">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
@@ -261,7 +261,7 @@
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
                             <label>Total Ammount</label>
-                            <input type="text" name="total_fee" class="form-control" readonly id="total_fee" value="{{$data->total_fee}}">
+                            <input type="text" name="total_fee" class="form-control" id="total_fee" value="{{$data->total_fee}}">
                         </div>
                     </div>
 

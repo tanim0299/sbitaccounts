@@ -78,24 +78,38 @@
 </head>
 
 <style type="text/css">
+
+	.page-break {
+    page-break-after: always;
+}
 	body[themebg-pattern=theme1]{
 		background: none;
 	}
 	.page-a4 {
-    /*height: 297mm;*/
+    /*height: 31.6cm;*/
     background: white;
     box-shadow: 0px 2px 3px black;
     margin-top: 5px;
-    width: 210mm;
+    /*width: 21cm;*/
     margin: auto;
+    overflow: hidden;
 }
 body{
 	font-family: raleway;
 }
-.left_sidebar {
+
+	.left_sidebar {
     /*height: 297mm;*/
     background: lightgray;
     border-top: 28px solid lightgray;
+    padding: 5px 7px;
+    background: lightgray;
+    -webkit-print-color-adjust: exact;
+}
+
+.left_sidebar{
+	background-attachment: fixed;
+	background: lightgray;
 }
 
 .logo {
@@ -118,7 +132,7 @@ body{
     text-transform: uppercase;
 }
 .section_info {
-    padding: 16px;
+    padding: 5px;
 }
 
 .section_info {margin-top: 20px;}
@@ -134,7 +148,7 @@ body{
     list-style: none;
     padding-left: 11px;
     font-size: 13px;
-    padding-top: 18px;
+    padding-top: 5px;
 }
 
 .contact li i {
@@ -142,6 +156,7 @@ body{
     color: white;
     padding: 5px;
     border-radius: 15px;
+    -webkit-print-color-adjust: exact;
 }
 
 .contact li b {
@@ -161,6 +176,7 @@ i.feather.icon-user {}
     padding: 6px 15px;
     color: white;
     margin-top: 12px;
+    -webkit-print-color-adjust: exact;
 }
 .title {
     margin-top: 26px;
@@ -199,6 +215,7 @@ div#wrap-box {
 .section-box input {
     background: white;
     border: 1px solid lightgray;
+    -webkit-print-color-adjust: exact;
 }
 
 .section-box input:focus {
@@ -208,16 +225,19 @@ div#wrap-box {
 .section-box textarea {
     background: white;
     border: 1px solid lightgray;
+    -webkit-print-color-adjust: exact;
 }
 
 .section-box textarea:focus {
     box-shadow: none;
     border: 1px solid lightgray;
+    -webkit-print-color-adjust: exact;
 }
 
 .contact input {
     background: white;
     border: 1px solid lightgray;
+    -webkit-print-color-adjust: exact;
 }
 
 .contact input:focus {
@@ -226,6 +246,7 @@ div#wrap-box {
 }
 .form-control:disabled, .form-control[readonly] {
     background: white !important;
+    -webkit-print-color-adjust: exact;
 }
 </style>
 
@@ -235,8 +256,8 @@ div#wrap-box {
 
 @if($data)
 	<div class="mian-box">
-		<div class="container">
-			<div class="page-a4">
+		<div class="container-fluid">
+			<div class="page-a4 page-break">
 				<div class="row">
 					<div class="col-4">
 						<div class="border">
@@ -284,8 +305,9 @@ div#wrap-box {
 						 			<b>Payment Info</b>
 						 		</div>
 						 		<div class="contact">
-						 			<b style="margin-top: 5px;">Course Fee : </b><input type="text" name="" class="form-control" readonly value="{{$data->main_fee}}">
+						 			<b style="margin-top: 5px;">Total Fee : </b><input type="text" name="" class="form-control" readonly value="{{$data->main_fee}}">
 						 			<b style="margin-top: 5px;">Discount : </b><input type="text" name="" class="form-control" readonly value="{{$data->discount}}">
+						 			<b style="margin-top: 5px;">Course Fee : </b><input type="text" name="" class="form-control" readonly value="{{$data->total_fee}}">
 						 			<b style="margin-top: 5px;">Discount(%): </b><input type="text" name="" class="form-control" readonly value="{{$data->discount_per}}">
 						 			<b style="margin-top: 5px;">Join Date : </b><input type="text" name="" class="form-control" readonly value="{{$data->join_date}}">
 						 			<b style="margin-top: 5px;">Class Time : </b><input type="text" name="" class="form-control" readonly value="{{$data->class_time}}">
@@ -319,6 +341,10 @@ div#wrap-box {
 							</div>
 							<div class="row">
 								<div class="col-6">
+									<div class="section-box">
+										<label>Student ID</label>
+										<input type="text" name="" readonly class="form-control" value="{{$data->unique_id}}">
+									</div>
 									<div class="section-box">
 										<label>Date</label>
 										<input type="text" name="" readonly class="form-control" value="{{$data->date}}">
@@ -430,6 +456,9 @@ div#wrap-box {
 					</div>
 				</div>
 			</div>
+			<!-- <div class="download_btn text-center mt-2 pb-2">
+				<a href="{{url('/downloadForm')}}/{{$data->id}}" class="btn btn-outline-success">Download Form</a>
+			</div> -->
 		</div>
 	</div>
 	@endif
@@ -517,149 +546,6 @@ div#wrap-box {
 
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> -->
 
-<script type="text/javascript">
-    
-   function courseFee(id)
-   {
-   	$("#course_id-"+id).on('change',function(){
-   		var id = $(this).val();
-
-   		var presentValue = $("#main_fee").val();
-
-   		// var default = 
-
-   		if($('#course_id-'+id).is(':checked'))
-   		{
-   			$.ajax({
-
-   				headers : {
-                    'X-CSRF-TOKEN' : "{{ csrf_token() }}"
-                },
-
-                url : '{{url('getCourseFee')}}',
-
-                type : 'POST',
-
-                data : {
-
-                    id : id,p_value:presentValue
-                },
-
-                success : function(data)
-                {
-                	$('#main_fee').val(data);
-                    $('#total_fee').val(data);
-                } 
-   		});
-
-
-   		}
-   		else if($('#course_id-'+id).is(':not(:checked)'))
-   		{
-   			// $("#fee").html("Please Select A Course");
-   			$.ajax({
-
-   				headers : {
-                    'X-CSRF-TOKEN' : "{{ csrf_token() }}"
-                },
-
-                url : '{{url('subCourseFee')}}',
-
-                type : 'POST',
-
-                data : {
-
-                    id : id,p_value:presentValue
-                },
-
-                success : function(data)
-                {
-                	$('#main_fee').val(data);
-                    $('#total_fee').val(data);
-                } 
-   		});
-
-   		}
-   		else
-   		{
-   			$("#fee").html(data);
-   		}
-
-
-   		// alert(id);
-   	});
-
-
-   }
-
-   
-   $(document).ready(function(){
-
-
-    $("#discount_ammount").on('keyup',function(){
-
-        var discount_ammount = parseInt($(this).val());
-
-        var main_fee = parseInt($("#main_fee").val());
-
-        // alert(main_fee);
-
-        if(discount_ammount > main_fee)
-        {
-            UIkit.notification({
-                message: 'Invalid Discount Ammount!',
-                status: 'primary',
-                pos: 'top-right',
-                timeout: 5000
-            });
-            $("#discount_ammount").val(0);
-            $("#total_fee").val(0);
-        }
-        else
-        {
-            var total_fee = main_fee - discount_ammount;
-
-            $("#total_fee").val(total_fee);
-        }
-
-    });
-
-
-
-    
-        
-    
-
-
-   });
-
-
-   $(document).ready(function(){
-
-    $("#discount_ammount").on('keyup',function(){
-
-        var main_fee = parseInt($("#main_fee").val());
-
-        var discount_ammount = parseInt($("#discount_ammount").val());
-
-        var discount_percentage = (discount_ammount/main_fee * 100);
-
-        var sign = "%";
-
-        $("#discount_per").val(discount_percentage.toFixed(0)+sign);
-
-        // alert();
-
-    });
-
-   });
-
-
-
-
-   
-
-</script>
 
 </body>
 

@@ -43,9 +43,9 @@
 
 <script src="{{asset('public/Backend')}}/bower_components/datatables.net-buttons/js/buttons.print.min.js"></script>
 <script src="{{asset('public/Backend')}}/bower_components/datatables.net-buttons/js/buttons.html5.min.js"></script>
-<!-- <script src="{{asset('public/Backend')}}/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script> -->
+<script src="{{asset('public/Backend')}}/bower_components/datatables.net-bs4/js/dataTables.bootstrap4.min.js"></script>
 <script src="{{asset('public/Backend')}}/bower_components/datatables.net-responsive/js/dataTables.responsive.min.js"></script>
-<!-- <script src="{{asset('public/Backend')}}/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script> -->
+<script src="{{asset('public/Backend')}}/bower_components/datatables.net-responsive-bs4/js/responsive.bootstrap4.min.js"></script>
 
 <script src="{{asset('public/Backend')}}/assets/pages/data-table/js/data-table-custom.js"></script>
 <script type="text/javascript" src="{{asset('public/Backend')}}/bower_components/bootstrap-datepicker/js/bootstrap-datepicker.min.js"></script>
@@ -86,6 +86,18 @@
 
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.14.3/dist/js/uikit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.14.3/dist/js/uikit-icons.min.js"></script>
+
+
+<!-- <script type="text/javascript" src="{{asset('public/Backend')}}/bower_components/select2/js/select2.full.min.js"></script>
+
+<script type="text/javascript" src="{{asset('public/Backend')}}/bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js">
+</script>
+<script type="text/javascript" src="{{asset('public/Backend')}}/bower_components/multiselect/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="{{asset('public/Backend')}}/assets/js/jquery.quicksearch.js"></script>
+
+<script type="text/javascript" src="{{asset('public/Backend')}}/assets/pages/advance-elements/select2-custom.js"></script> -->
+
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
 
 
 
@@ -237,15 +249,173 @@
 
 
 <script type="text/javascript">
-    $("#main_link").click(function(){
-        $('#main_link').removeClass('active');
-        $('#main_link').addClass('active');
-    }); 
+    $(document).ready(function() {
+    $('.js-example-basic-single').select2();
+});
+</script>
 
-    $("#sub_link").click(function(){
-        $('#sub_link').removeClass('active');
-        $('#sub_link').addClass('active');
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+
+$("#student_id").on('change',function(){
+
+// alert();
+
+var std_id = $(this).val();
+
+// alert(std_id);
+
+if(std_id == " ")
+{
+
+}
+else
+{
+    $.ajax({
+
+            headers : {
+                'X-CSRF-TOKEN' : "{{ csrf_token() }}"
+            },
+
+            url : '{{url('getTrainer')}}',
+
+            type : 'POST',
+
+            data : {
+
+                id:std_id,
+            },
+
+            success : function(data)
+            {
+                // alert(data);
+                // $("#result").html(data);
+                $("#course_detail").html(data);
+            } 
     });
+}
+
+});
+
+});
+
+</script>
+
+
+<script type="text/javascript">
+$(document).ready(function(){
+
+
+$("#std_id").on('change',function(){
+
+// alert();
+
+var std_id = $(this).val();
+
+// alert(std_id);
+
+if(std_id == " ")
+{
+
+}
+else
+{
+    $.ajax({
+
+            headers : {
+                'X-CSRF-TOKEN' : "{{ csrf_token() }}"
+            },
+
+            url : '{{url('getstdTrainer')}}',
+
+            type : 'POST',
+
+            data : {
+
+                id:std_id,
+            },
+
+            success : function(data)
+            {
+                // alert(data);
+                // $("#result").html(data);
+                $("#course_detail").html(data);
+            } 
+    });
+}
+
+});
+
+});
+
+</script>
+
+<script type="text/javascript">
+    $(document).ready(function(){
+
+        $("#studentId").on('change',function(){
+            var std_id = $(this).val();
+            // alert(std_id);
+            if(std_id == 0)
+            {
+                alert('Select a Student');
+            }
+            else
+            {
+                $.ajax({
+
+                headers : {
+                    'X-CSRF-TOKEN' : "{{ csrf_token() }}"
+                },
+
+                url : '{{url('getStudentFee')}}',
+
+                type : 'POST',
+
+                data : {
+
+                    id:std_id,
+                },
+
+                success : function(data)
+                {
+                    $("#totaldue").val(data);
+                } 
+        });
+            }
+        });
+
+    });
+</script>
+
+<script type="text/javascript">
+    
+    $(document).ready(function(){
+
+        $('#collection_ammount').on('keyup',function(){
+
+            var collection_ammount = parseInt($(this).val());
+            var due_ammount = parseInt($("#totaldue").val());
+            // alert(due_ammount);
+
+            if(collection_ammount > due_ammount)
+            {
+                $("#collection_ammount").val(0);
+            }
+            else
+            {
+                var new_due = due_ammount - collection_ammount;
+
+                $("#new_due").val(new_due);
+            }
+
+        });
+
+    });
+
 </script>
 
 </body>

@@ -58,11 +58,13 @@ class subMenuController extends Controller
         $validated = $request->validate([
         'sl' => 'required',
         'main_menuid' => 'required',
-        'submenu_name' => 'required|min:5',
+        'submenu_name' => 'required',
         'status' => 'required',
     ]);
 
-    $update = sub_menu::find($id)->update($request->except('_token','submit'));
+        // dd($request->all());
+
+    $update = DB::table('sub_menu')->where('id',$id)->update($request->except('_token','submit'));
 
     if($update)
     {

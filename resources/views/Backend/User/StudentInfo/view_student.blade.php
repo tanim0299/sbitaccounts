@@ -50,6 +50,7 @@
                         <tr>
                             <!-- <th>Select</th> -->
                             <th>Sl</th>
+                            <th>Id</th>
                             <th>Name</th>
                             <th>Fathers Name</th>
                             <th>Mothers Name</th>
@@ -79,6 +80,7 @@
                         <tr>
                             <!-- <td><input type="checkbox" name="id[]" value="{{$showdata->id}}"></td> -->
                             <td>{{$sl++}}</td>
+                            <td>{{$showdata->unique_id}}</td>
                             <td>{{$showdata->name}}</td>
                             <td>{{$showdata->fathers_name}}</td>
                             <td>{{$showdata->mothers_name}}</td>
@@ -94,12 +96,12 @@
                                 $course = DB::table('student_course_info')
                                           ->where('student_id',$showdata->id)
                                           ->join('course_infos','course_infos.id','=','student_course_info.course_id')
-                                          ->select('course_infos.course_name')
+                                          ->select('course_infos.course_name','student_course_info.status')
                                           ->get();  
                                 @endphp
                                 @if($course)
                                 @foreach($course as $showcourse)
-                                <li>{{$showcourse->course_name}}</li>
+                                <li>{{$showcourse->course_name}} @if($showcourse->status == '1')<span  class="badge badge-success">Completed</span> @endif</li>
                                 @endforeach
                                 @endif
                             </td>
@@ -107,8 +109,8 @@
                             <td>{{$showdata->discount}}</td>
                             <td>{{$showdata->discount_per}}</td>
                             <td>{{$showdata->total_fee}}</td>
-                            <td></td>
-                            <td></td>
+                            <td><div style="font-size: 20px;" class="badge badge-success">{{$showdata->paid}}</div></td>
+                            <td><div style="font-size: 20px;" class="badge badge-danger">{{$showdata->due}}</div></td>
                             <td>{{$showdata->join_date}}</td>
                             <td>{{$showdata->class_time}}</td>
                             <td><img src="{{asset('public/public/Backend')}}/Images/studentImage/{{$showdata->image}}" height="70px" width="70px" style="border-radius:100px;"></td>
@@ -116,6 +118,8 @@
                                 <a target="blank" href="{{url('showForm')}}/{{$showdata->id}}" class="btn btn-outline-secondary">Show Form</a>
                                 <a href="{{url('editStudent')}}/{{$showdata->id}}" class="btn btn-outline-info">Edit</a>
                                 <a href="{{url('deleteStudent')}}/{{$showdata->id}}" class="btn btn-outline-danger">Delete</a>
+                                <a href="{{url('details')}}/{{$showdata->id}}" class="btn btn-outline-secondary">Details</a><br>
+                                <a target="blank" href="{{url('id_card')}}/{{$showdata->id}}" class="btn btn-outline-warning">Get ID Card</a>
                             </td>
                         </tr>
                         @endforeach

@@ -117,23 +117,33 @@ class trainerController extends Controller
     public function delete($id)
     {
 
-        $pathImage = DB::table('trainer_info')->where('id',$id)->first();
-
-        $path = public_path('Backend/Images/trainerImage').$pathImage->image;
-
-        if(file_exists($path))
+        $trainer_check = DB::table('trainer_appoint')->where('trainer_id',$id)->get();
+        if(count($trainer_check) > 0)
         {
-            unlink($path);
-        }
-
-        $delete = DB::table('trainer_info')->where('id',$id)->delete();
-        if($delete)
-        {
-            return redirect()->back()->with('success','Data Delete Successfully');
+            return redirect()->back()->with('error','This Student Have Trainer');
         }
         else
         {
-            return redirect()->back()->with('error','Data Delete Unsuccessfull');
+            $pathImage = DB::table('trainer_info')->where('id',$id)->first();
+
+            $path = public_path('Backend/Images/trainerImage').$pathImage->image;
+
+            if(file_exists($path))
+            {
+                unlink($path);
+            }
+
+            $delete = DB::table('trainer_info')->where('id',$id)->delete();
+            if($delete)
+            {
+                return redirect()->back()->with('success','Data Delete Successfully');
+            }
+            else
+            {
+                return redirect()->back()->with('error','Data Delete Unsuccessfull');
+            }
         }
+
+        
     }
 }
