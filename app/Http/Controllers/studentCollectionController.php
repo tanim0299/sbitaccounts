@@ -4,12 +4,15 @@ namespace App\Http\Controllers;
 
 use Illuminate\Http\Request;
 use DB;
+use NumberToWords\NumberToWords;
+// use Illuminate\Foundation\Auth\AuthenticatesUsers;
 
 class studentCollectionController extends Controller
 {
     public function index()
     {
         $student = DB::table('student_info')
+                   ->where('due','>',0)
                    ->get();
         return view('Backend.User.StudentCollection.add_stdcollection',compact('student'));
     }
@@ -86,5 +89,33 @@ class studentCollectionController extends Controller
         {
             return redirect()->back()->with('error','Collection Delete Unsuccessfull');
         }
+    }
+    public function voucher($collection_id,$student_id)
+    {
+        $std_info = DB::table('student_collection')
+                    ->where('student_id',$student_id)
+                    ->join('student_info','student_info.id','=','student_collection.student_id')
+                    ->select('student_collection.*','student_info.name','student_info.total_fee','student_info.due','student_info.paid','student_info.unique_id','student_info.phone','student_info.upazila','student_info.district','student_info.adress')->first();
+
+        $course_info = DB::table('student_course_info')
+                       ->where('student_id',$student_id)
+                       ->join('course_infos','course_infos.id','student_course_info.course_id')
+                       ->select('course_infos.course_name')
+                       ->get();
+
+        $sl=1;
+        $course_number = 1;
+
+        $numberToWords = new NumberToWords();
+
+        // $numberTransformer->toWords(5120);
+
+        $numberTransformer = $numberToWords->getNumberTransformer('en');
+
+        $ammount_word = $numberTransformer->toWords($std_info->collection_ammount);
+
+        $user_name = Auth()->user()->name;
+
+        return view('Backend.User.StudentCollection.voucher',compact('std_info','ammount_word','course_info','user_name','sl','course_number'));
     }
 }

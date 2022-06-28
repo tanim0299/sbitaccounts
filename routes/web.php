@@ -83,6 +83,9 @@ Route::get('/id_card/{id}',[App\Http\Controllers\studentController::class, 'id_c
 Route::get('/downloadForm/{id}',[App\Http\Controllers\studentController::class, 'downloadForm']);
 Route::get('/download_id/{id}',[App\Http\Controllers\studentController::class, 'download_id']);
 
+Route::get('/getCertificate/{student_id}/{course_id}',[App\Http\Controllers\studentController::class, 'getCertificate']);
+Route::get('/downloadCertificate/{id}/{course_id}',[App\Http\Controllers\studentController::class, 'downloadCertificate']);
+
 
 // student collection
 Route::get('/addCollection',[App\Http\Controllers\studentCollectionController::class, 'index']);
@@ -90,6 +93,9 @@ Route::post('/getStudentFee',[App\Http\Controllers\studentCollectionController::
 Route::post('/collectionStore',[App\Http\Controllers\studentCollectionController::class, 'store']);
 Route::get('/viewStdcollection',[App\Http\Controllers\studentCollectionController::class, 'view']);
 Route::get('/deleteCollection/{id}/{student_id}',[App\Http\Controllers\studentCollectionController::class, 'delete']);
+Route::get('/voucher/{collection_id}/{student_id}',[App\Http\Controllers\studentCollectionController::class, 'voucher']);
+
+
 
 
 // trainer information
@@ -99,3 +105,12 @@ Route::get('/viewTrainer',[App\Http\Controllers\trainerController::class, 'view'
 Route::get('/editTrainer/{id}',[App\Http\Controllers\trainerController::class, 'edit']);
 Route::post('/trainerUpdate/{id}',[App\Http\Controllers\trainerController::class, 'update']);
 Route::get('/deleteTrainer/{id}',[App\Http\Controllers\trainerController::class, 'delete']);
+
+//income info
+Route::get('/addIncome_title',[App\Http\Controllers\incomeController::class, 'index']);
+Route::post('/incomeTitleStore',[App\Http\Controllers\incomeController::class, 'store']);
+Route::get('/editIncomeTitle/{id}',[App\Http\Controllers\incomeController::class, 'edit']);
+Route::post('/incomeTitleUpdate/{id}',[App\Http\Controllers\incomeController::class, 'update']);
+Route::get('/deleteIncomeTitle/{id}',[App\Http\Controllers\incomeController::class, 'delete']);
+Route::get('/addIncome',[App\Http\Controllers\incomeController::class, 'addIncome']);
+Route::post('/incomeStore',[App\Http\Controllers\incomeController::class, 'incomeStore']);

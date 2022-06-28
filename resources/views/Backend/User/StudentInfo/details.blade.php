@@ -67,7 +67,7 @@
                             </div>
                         </div>
                     </div>
-                    <div class="col-6">
+                    <div class="col-lg-6 col-md-12 col-12">
                         <div class="course_info">
                             @php
                             $course = DB::table('student_course_info')
@@ -89,14 +89,14 @@
                             </div>
                         </div>
                         <div class="row">
-                            <div class="col-6">
+                            <div class="col-lg-6 col-md-12 col-12">
                                 <div class="course_box">
                                     <div class="title" style="background: green;">
                                         <h5>Paid : {{$data->paid}}/-</h5>
                                     </div>
                                 </div>
                             </div>
-                            <div class="col-6">
+                            <div class="col-lg-6 col-md-12 col-12">
                                 <div class="course_box">
                                     <div class="title" style="background: red;">
                                         <h5>Due : {{$data->due}}/-</h5>
@@ -141,7 +141,7 @@
                             </div>
                             <div class="complete_btn" style="text-align:center;padding: 5px;">
                                 @if($show_course_info->status == '1')
-                                <a href="{{url('getCertificate')}}/{{$data->id}}/{{$show_course_info->id}}" class="btn btn-outline-success">Get Certificate</a>
+                                <a target="blank" href="{{url('getCertificate')}}/{{$data->id}}/{{$show_course_info->id}}" class="btn btn-outline-success">Get Certificate</a>
                                 @else
                                 <a href="{{url('complete_course')}}/{{$data->id}}/{{$show_course_info->id}}" class="btn btn-outline-info">Complete</a>
                                 @endif

@@ -258,10 +258,11 @@ class studentController extends Controller
 
     public function completeCourse($id,$course_id)
     {
+        $complete_date = date('d/m/Y');
         $update = DB::table('student_course_info')
                   ->where('student_id',$id)
                   ->where('course_id',$course_id)
-                  ->update(['status'=>'1']);
+                  ->update(['status'=>'1','complete_date'=>$complete_date,]);
 
         if($update)
         {
@@ -404,6 +405,32 @@ class studentController extends Controller
                 'defaultFont'=>'sans-serif',
               ]);
 
-        return $pdf->download($data->name.'.pdf');
+        return $pdf->stream($data->name.'.pdf');
+    }
+
+    public function getCertificate($student_id,$course_id)
+    {
+        $data = DB::table('student_info')->where('id',$student_id)->first();
+        $date = date('d/m/Y');
+        return view('Backend.User.StudentInfo.certificate',compact('data','course_id','date'));
+    }
+
+    public function downloadCertificate($id,$course_id)
+    {
+       $data = DB::table('student_info')->where('id',$id)->first();
+
+       $date = date('d/m/Y');
+       
+       $pdf = PDF::loadView('Backend.User.StudentInfo.certificate_download',compact('data','course_id','date'))
+              ->setPaper('A4','landscape')
+              ->setOptions([
+                // 'defaultFont'=>'sans-serif',
+              ]);
+
+        // $oup
+
+        return $pdf->download($data->name.'-certificate.pdf',array("Attachment" => 0));
+
+       // return view('Backend.User.StudentInfo.certificate_download',compact('data','course_id','date'));
     }
 }

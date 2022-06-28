@@ -79,20 +79,21 @@
 
 <style type="text/css">
 
-	.page-break {
+	/*.page-break {
     page-break-after: always;
-}
+}*/
 	body[themebg-pattern=theme1]{
 		background: none;
 	}
 	.page-a4 {
-    /*height: 31.6cm;*/
+    height: 31.6cm;
     background: white;
     box-shadow: 0px 2px 3px black;
     margin-top: 5px;
     /*width: 21cm;*/
     margin: auto;
     overflow: hidden;
+    /*margin-top: 30px;*/
 }
 body{
 	font-family: raleway;
@@ -148,7 +149,7 @@ body{
     list-style: none;
     padding-left: 11px;
     font-size: 13px;
-    padding-top: 5px;
+    padding-top: 10px;
 }
 
 .contact li i {
@@ -542,7 +543,11 @@ div#wrap-box {
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.14.3/dist/js/uikit.min.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.14.3/dist/js/uikit-icons.min.js"></script>
 
-
+<script type="text/javascript">
+	window.print();
+	// window.close();
+	// window.onafter = window.close;
+</script>
 
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> -->
 

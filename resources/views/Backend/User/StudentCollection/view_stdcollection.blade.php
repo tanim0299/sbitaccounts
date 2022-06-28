@@ -71,6 +71,7 @@
                             </td>
                             <td>
                                 <a href="{{url('/deleteCollection')}}/{{$showdata->id}}/{{$showdata->student_id}}" class="btn btn-outline-danger">Delete</a>
+                                <a target="blank" href="{{url('/voucher')}}/{{$showdata->id}}/{{$showdata->student_id}}" class="btn btn-outline-info">Voucher</a>
                             </td>
                         </tr>
                         @endforeach

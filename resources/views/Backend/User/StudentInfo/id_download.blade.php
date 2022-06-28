@@ -24,7 +24,7 @@
 }
 .card_single {
     height: 3.25in;
-    width: 1.75in;
+    width: 2in;
     overflow: hidden;
     box-shadow: 2px 2px 1px -1px black;
     border: 1px solid lightgray;
