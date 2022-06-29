@@ -131,6 +131,18 @@ class expenseController extends Controller
             return redirect()->back()->with('error','Data Update Unsuccessfully');
         }
     }
+    public function deleteExpense($id)
+    {
+        $delete = DB::table('expense_infos')->where('id',$id)->delete();
+        if($delete)
+        {
+            return redirect()->back()->with('success','Data Delete Successfully');
+        }
+        else
+        {
+            return redirect()->back()->with('error','Data Delete Unsuccessfully');
+        }
+    }
     public function expense_report()
     {
         return view('Backend.User.ExpenseInfo.expense_report');

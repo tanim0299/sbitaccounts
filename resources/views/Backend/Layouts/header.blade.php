@@ -4,7 +4,7 @@
 <!-- Mirrored from demo.dashboardpack.com/admindek-html/default/dashboard-crm.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 14 Jun 2022 06:17:12 GMT -->
 <!-- Added by HTTrack --><meta http-equiv="content-type" content="text/html;charset=UTF-8" /><!-- /Added by HTTrack -->
 <head>
-<title>Admindek | Admin Template</title>
+<title>Skill Based IT | Admin Dashboard</title>
 
 
 <!--[if lt IE 10]>
@@ -142,6 +142,21 @@ span#select2-student_id-qc-container {
     margin-left: 12px;
     /* padding-left: 6px; */
 }
+h6.m-b-5.text-white {
+    font-size: 13px;
+}
+
+h3.m-b-0.f-w-700.text-white {
+    font-size: 18px;
+}
+.navbar-logo img {
+    width: 100%;
+    height: 47px;
+}
+
+.navbar-logo {
+    overflow: hidden;
+}
 </style>
 <body>
 
@@ -157,7 +172,7 @@ span#select2-student_id-qc-container {
 <div class="navbar-wrapper">
 <div class="navbar-logo">
 <a href="{{url('/home')}}">
-<img class="img-fluid" src="{{asset('public/Backend')}}/assets/images/logo.png" alt="Theme-Logo" />
+<img class="img-fluid" src="{{asset('public/public/Backend')}}/images/logo.png" alt="Theme-Logo" />
 </a>
 <a class="mobile-menu" id="mobile-collapse" href="#!">
 <i class="feather icon-menu icon-toggle-right"></i>

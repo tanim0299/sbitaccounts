@@ -135,6 +135,7 @@ Route::get('/add_expense',[App\Http\Controllers\expenseController::class, 'add_e
 Route::post('/expenseStore',[App\Http\Controllers\expenseController::class, 'expenseStore']);
 Route::get('/view_expense',[App\Http\Controllers\expenseController::class, 'view_expense']);
 Route::get('/edit_expense/{id}',[App\Http\Controllers\expenseController::class, 'edit_expense']);
+Route::get('/deleteExpense/{id}',[App\Http\Controllers\expenseController::class, 'deleteExpense']);
 Route::post('/expenseUpdate/{id}',[App\Http\Controllers\expenseController::class, 'expenseUpdate']);
 Route::get('/expense_report',[App\Http\Controllers\expenseController::class, 'expense_report']);
 Route::post('/showExpenseReport',[App\Http\Controllers\expenseController::class, 'showExpenseReport']);

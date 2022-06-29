@@ -66,7 +66,7 @@
                             <td>{{$showdata->ammount}}</td>
                             <td>
                                 <a href="{{url('edit_expense')}}/{{$showdata->id}}" class="btn btn-outline-info">Edit</a>
-                                <a href="{{url('delete_income')}}/{{$showdata->id}}" class="btn btn-outline-danger">Delete</a>
+                                <a href="{{url('deleteExpense')}}/{{$showdata->id}}" class="btn btn-outline-danger">Delete</a>
                             </td>
                         </tr>
                         @endforeach
