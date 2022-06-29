@@ -15,7 +15,7 @@ class CreateStudentCollectionsTable extends Migration
     {
         Schema::create('student_collection', function (Blueprint $table) {
             $table->id();
-            $table->string('date',20);
+            $table->date('date',20);
             $table->bigInteger('student_id')->unsigned();
             $table->foreign('student_id')->references('id')->on('student_info');
             $table->double('collection_ammount',10,2);

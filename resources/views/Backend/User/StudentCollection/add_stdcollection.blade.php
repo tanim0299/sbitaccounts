@@ -55,8 +55,8 @@
             <form method="POST" enctype="multipart/form-data" action="{{url('/collectionStore')}}">
                 @csrf
                 <div class="input-single-box">
-                    <label>Date</label>
-                    <input name="date" id="dropper-animation" class="form-control" type="text" placeholder="Select your Date" required>
+                    <label>Date (YYYY/MM/DD)</label>
+                    <input name="date" class="form-control" type="text" value="@php echo date('Y-m-d') @endphp" required id="dateTimePicker">
                 </div>
                 <div class="input-single-box">
                     <label>Select Student</label>
@@ -87,7 +87,7 @@
                 </div>
                 <input type="text" name="admin_id" class="form-control" value="{{Auth()->user()->id}}" hidden>
                 <div class="input-single-box">
-                    <input type="submit" name="submit" class="btn btn-success">
+                    <input type="submit" name="submit" class="btn btn-success" formtarget="_blank">
                 </div>
             </form>
         </div>

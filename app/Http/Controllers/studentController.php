@@ -405,7 +405,7 @@ class studentController extends Controller
                 'defaultFont'=>'sans-serif',
               ]);
 
-        return $pdf->stream($data->name.'.pdf');
+        return $pdf->download($data->name.'.pdf');
     }
 
     public function getCertificate($student_id,$course_id)

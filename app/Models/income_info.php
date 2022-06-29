@@ -9,5 +9,5 @@ class income_info extends Model
 {
     protected $table = 'income_info';
 
-    protected $fillable = ['date','income_title_id','recived_from','ammount','details'];
+    protected $fillable = ['date','income_title_id','recived_from','ammount','details','admin_id'];
 }

@@ -39,7 +39,7 @@ th {
 }
 </style>
 <body>
-@if($std_info)
+@if($data)
 	<div class="container">
 		 <div class="invoice">
 		 	<div class="invoice-header">
@@ -53,43 +53,32 @@ th {
 		 				<tr>
 		 					<td colspan="3">
 		 						<div class="recipent_info">
-		 							<b>Date: </b><span>{{$std_info->date}}</span><br>
-		 							<b>Student ID: </b><span>{{$std_info->unique_id}}</span><br>
-		 							<b>Recived From: </b><span>{{$std_info->name}}</span><br>
-		 							<b>Phone: </b><span>{{$std_info->phone}}</span><br>
-		 							<b>Adress: </b><span>{{$std_info->adress}},{{$std_info->upazila}},{{$std_info->district}}</span><br>
+		 							<b>Date: </b><span>{{$data->date}}</span><br>
+		 							<b>Recived From: </b><span>{{$data->recived_from}}</span><br>
+		 							<b>Description: </b><span>{{$data->income_title}}</span><br>
 		 						</div>
 		 					</td>
 		 					<td colspan="3">
 		 						<div class="recipent_info">
-		 							@if($course_info)
-									@foreach($course_info as $show_course_info)
-									<b>Course({{$course_number++}}): </b><span class="course_name_data">{{$show_course_info->course_name}}&</span><br>
-									@endforeach
-									@endif
-		 							<b>Print By: </b><span>{{$user_name}}</span><br>
+		 							<b>Print By: </b><span>{{Auth()->user()->name}}</span><br>
 		 						</div>
 		 					</td>
 		 				</tr>
 		 				<tr>
-		 					<td colspan="6" style="text-align:center;">Invioce For - {{$std_info->name}}</td>
+		 					<td colspan="6" style="text-align:center;">Invioce For - {{$data->recived_from}}</td>
 		 				</tr>
 		 				<tr>
 		 					<th>Sl</th>
 		 					<th>Date</th>
-		 					<th>Total Course Fee</th>
-		 					<th>Today Paid</th>
-		 					<th>Total Paid</th>
-		 					<th>Total Due</th>
+		 					<th>Recived From</th>
+		 					<th>Ammount</th>
 		 				</tr>
 		 				
 		 				<tr>
 		 					<td>{{$sl++}}</td>
-		 					<td>{{$std_info->date}}</td>
-		 					<td>{{$std_info->total_fee}}/-</td>
-		 					<td>{{$std_info->collection_ammount}}/-</td>
-		 					<td>{{$std_info->paid}}/-</td>
-		 					<td>{{$std_info->due}}/-</td>
+		 					<td>{{$data->date}}</td>
+		 					<td>{{$data->recived_from}} ({{$data->details}})</td>
+		 					<td>{{$data->ammount}}/-</td>
 		 				</tr>
 		 				
 		 				<tr>

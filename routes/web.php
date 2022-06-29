@@ -114,3 +114,33 @@ Route::post('/incomeTitleUpdate/{id}',[App\Http\Controllers\incomeController::cl
 Route::get('/deleteIncomeTitle/{id}',[App\Http\Controllers\incomeController::class, 'delete']);
 Route::get('/addIncome',[App\Http\Controllers\incomeController::class, 'addIncome']);
 Route::post('/incomeStore',[App\Http\Controllers\incomeController::class, 'incomeStore']);
+Route::get('/income_voucher/{id}',[App\Http\Controllers\incomeController::class, 'voucher']);
+Route::get('/view_income',[App\Http\Controllers\incomeController::class, 'viewIncome']);
+Route::get('/edit_income/{id}',[App\Http\Controllers\incomeController::class, 'editIncome']);
+Route::post('/incomeUpdate/{id}',[App\Http\Controllers\incomeController::class, 'incomeUpdate']);
+Route::get('/delete_income/{id}',[App\Http\Controllers\incomeController::class, 'delete_income']);
+Route::get('/income_report',[App\Http\Controllers\incomeController::class, 'incomeReport']);
+
+
+Route::post('/showReport',[App\Http\Controllers\incomeController::class, 'showReport']);
+
+
+//expense info
+Route::get('/addExpenseTitle',[App\Http\Controllers\expenseController::class, 'addExpenseTitle']);
+Route::post('/expenseTitleStore',[App\Http\Controllers\expenseController::class, 'expenseTitleStore']);
+Route::get('/editExpenseTitle/{id}',[App\Http\Controllers\expenseController::class, 'editExpenseTitle']);
+Route::post('/expenseTitleUpdate/{id}',[App\Http\Controllers\expenseController::class, 'expenseTitleUpdate']);
+Route::get('/deleteExpenseTitle/{id}',[App\Http\Controllers\expenseController::class, 'deleteExpenseTitle']);
+Route::get('/add_expense',[App\Http\Controllers\expenseController::class, 'add_expense']);
+Route::post('/expenseStore',[App\Http\Controllers\expenseController::class, 'expenseStore']);
+Route::get('/view_expense',[App\Http\Controllers\expenseController::class, 'view_expense']);
+Route::get('/edit_expense/{id}',[App\Http\Controllers\expenseController::class, 'edit_expense']);
+Route::post('/expenseUpdate/{id}',[App\Http\Controllers\expenseController::class, 'expenseUpdate']);
+Route::get('/expense_report',[App\Http\Controllers\expenseController::class, 'expense_report']);
+Route::post('/showExpenseReport',[App\Http\Controllers\expenseController::class, 'showExpenseReport']);
+
+
+//statement
+Route::get('/statement',[App\Http\Controllers\statementController::class, 'index']);
+Route::post('/showStatement',[App\Http\Controllers\statementController::class, 'showStatement']);
+

@@ -16,7 +16,7 @@ class CreateStudentInfosTable extends Migration
         Schema::create('student_info', function (Blueprint $table) {
             $table->id();
             $table->longText('unique_id');
-            $table->string('date');
+            $table->date('date');
             $table->string('type',20);
             $table->string('name',100);
             $table->string('fathers_name',100);
@@ -38,7 +38,7 @@ class CreateStudentInfosTable extends Migration
             $table->double('total_fee',10,2);
             $table->double('paid',10,2)->nullable();
             $table->double('due',10,2)->nullable();
-            $table->string('join_date');
+            $table->date('join_date');
             $table->string('class_time',20);
             $table->string('image',20);
             $table->string('admin_id',20);

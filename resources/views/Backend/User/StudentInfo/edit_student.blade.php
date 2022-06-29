@@ -58,8 +58,8 @@
                 <div class="row">
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
-                            <label>Date</label>
-                            <input name="date" id="dropper-animation" class="form-control" type="text" placeholder="Select your Date" required value="{{$data->date}}">
+                            <label>Date (YYYY/MM/DD)</label>
+                            <input name="date" class="form-control" type="text" required value="{{$data->date}}" id="dateTimePicker">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
@@ -270,8 +270,8 @@
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">
                         <div class="input-single-box">
-                            <label>Join Date</label>
-                            <input name="join_date" id="dropper-default" class="form-control" type="text" placeholder="Select your Date" required value="{{$data->join_date}}">
+                            <label>Join Date (YYYY/MM/DD)</label>
+                            <input name="join_date" class="form-control" type="text" placeholder="Select your Date" required value="{{$data->join_date}}" id="dateTimePicker1">
                         </div>
                     </div>
                     <div class="col-lg-6 col-md-6 col-12">

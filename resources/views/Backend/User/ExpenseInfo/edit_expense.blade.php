@@ -8,10 +8,10 @@
 <div class="page-header-title">
 <!-- <i class="feather icon-home bg-c-blue"></i> -->
 <div class="d-inline">
-<h5>Add Income</h5>
+<h5>Edit Expense</h5>
 <!-- <span>This Is SBIT Dashboard</span> -->
 <div class="links" style="margin-top: 20px;">
-    <a href="{{url('/view_income')}}" class="btn btn-outline-info">View Income</a>
+    <a href="{{url('/view_expense')}}" class="btn btn-outline-info">View Expense</a>
 </div>
 </div>
 </div>
@@ -29,7 +29,7 @@
  <div class="form-body">
     <div class="card">
         <div class="card-header">
-             <h5>Add Income</h5>
+             <h5>Edit Expense</h5>
         </div>
         <div class="card-block">
             @if ($errors->any())
@@ -52,41 +52,39 @@
                         <strong>{{Session::get('error')}}</strong>
                 </div>
                 @endif
-            <form method="POST" enctype="multipart/form-data" action="{{url('/incomeStore')}}">
+            @if($data)
+            <form method="POST" enctype="multipart/form-data" action="{{url('/expenseUpdate')}}/{{$data->id}}">
                 @csrf
                 <div class="input-single-box">
                     <label>Date (YYYY/MM/DD)</label>
-                    <input type="text" name="date" class="form-control" value="@php echo date('Y-m-d') @endphp" id="dateTimePicker">
+                    <input type="text" name="date" class="form-control" value="{{$data->date}}" id="dateTimePicker">
                 </div>
                 <div class="input-single-box">
                     <label>Income Type</label>
-                    <select class="form-control" name="income_title_id">
-                        @if($income_title)
-                        @foreach($income_title as $show_title)
-                        <option value="{{$show_title->id}}">{{$show_title->income_title}}</option>
+                    <select class="form-control" name="expense_title_id">
+                        @if($expense_title)
+                        @foreach($expense_title as $show_title)
+                        <option @if($data->expense_title_id == $show_title->id) active @endif value="{{$show_title->id}}">{{$show_title->expense_title}}</option>
                         @endforeach
                         @endif
                     </select>
                 </div>
                 <div class="input-single-box">
-                    <label>Recived From</label>
-                    <input type="text" name="recived_from" class="form-control" value="{{old('link_name')}}">
-                </div>
-                <div class="input-single-box">
                     <label>Ammount</label>
-                    <input type="text" name="ammount" class="form-control">
+                    <input type="text" name="ammount" class="form-control" value="{{$data->ammount}}">
                 </div>
 
                 <div class="input-single-box">
                     <label>Details</label>
-                    <textarea class="form-control" name="details" style="height:100px;"></textarea>
+                    <textarea class="form-control" name="details" style="height:100px;">{{$data->details}}</textarea>
                 </div>
                 
                 <input type="text" name="admin_id" class="form-control" value="{{Auth()->user()->id}}" hidden>
                 <div class="input-single-box">
-                    <input type="submit" name="submit" class="btn btn-success" formtarget="_blank">
+                    <input type="submit" name="submit" class="btn btn-success">
                 </div>
             </form>
+            @endif
         </div>
     </div> 
  </div>

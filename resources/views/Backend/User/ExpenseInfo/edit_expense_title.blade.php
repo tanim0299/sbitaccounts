@@ -8,11 +8,8 @@
 <div class="page-header-title">
 <!-- <i class="feather icon-home bg-c-blue"></i> -->
 <div class="d-inline">
-<h5>Add Income</h5>
+<h5>Edit Expense Title</h5>
 <!-- <span>This Is SBIT Dashboard</span> -->
-<div class="links" style="margin-top: 20px;">
-    <a href="{{url('/view_income')}}" class="btn btn-outline-info">View Income</a>
-</div>
 </div>
 </div>
 </div>
@@ -29,7 +26,7 @@
  <div class="form-body">
     <div class="card">
         <div class="card-header">
-             <h5>Add Income</h5>
+             <h5>Edit Expense Title</h5>
         </div>
         <div class="card-block">
             @if ($errors->any())
@@ -52,43 +49,37 @@
                         <strong>{{Session::get('error')}}</strong>
                 </div>
                 @endif
-            <form method="POST" enctype="multipart/form-data" action="{{url('/incomeStore')}}">
+                @if($data)
+            <form method="POST" enctype="multipart/form-data" action="{{url('/expenseTitleUpdate')}}/{{$data->id}}">
                 @csrf
                 <div class="input-single-box">
-                    <label>Date (YYYY/MM/DD)</label>
-                    <input type="text" name="date" class="form-control" value="@php echo date('Y-m-d') @endphp" id="dateTimePicker">
+                    <label>Serial No</label>
+                    <input type="text" name="sl" class="form-control" value="{{$data->sl}}">
                 </div>
                 <div class="input-single-box">
-                    <label>Income Type</label>
-                    <select class="form-control" name="income_title_id">
-                        @if($income_title)
-                        @foreach($income_title as $show_title)
-                        <option value="{{$show_title->id}}">{{$show_title->income_title}}</option>
-                        @endforeach
-                        @endif
+                    <label>Title Name</label>
+                    <input type="text" name="expense_title" class="form-control" value="{{$data->expense_title}}">
+                </div>
+                <div class="input-single-box">
+                    <label>Status</label>
+                    <select class="form-control" name="status"> 
+                    @if($data->status == '1')
+                    <option selected value="1">Active</option>
+                    <option value="0">Inactive</option>
+                    @else
+                    <option value="1">Active</option>
+                    <option selected value="0">Inactive</option>
+                    @endif
                     </select>
                 </div>
-                <div class="input-single-box">
-                    <label>Recived From</label>
-                    <input type="text" name="recived_from" class="form-control" value="{{old('link_name')}}">
-                </div>
-                <div class="input-single-box">
-                    <label>Ammount</label>
-                    <input type="text" name="ammount" class="form-control">
-                </div>
-
-                <div class="input-single-box">
-                    <label>Details</label>
-                    <textarea class="form-control" name="details" style="height:100px;"></textarea>
-                </div>
-                
                 <input type="text" name="admin_id" class="form-control" value="{{Auth()->user()->id}}" hidden>
                 <div class="input-single-box">
-                    <input type="submit" name="submit" class="btn btn-success" formtarget="_blank">
+                    <input type="submit" name="submit" class="btn btn-success">
                 </div>
             </form>
+            @endif
         </div>
-    </div> 
+    </div>
  </div>
  <!-- //body content goes here -->
 

@@ -63,6 +63,8 @@
 <script type="text/javascript" src="{{asset('public/Backend')}}/bower_components/jquery-minicolors/js/jquery.minicolors.min.js"></script>
 
 <script type="text/javascript" src="{{asset('public/Backend')}}/assets/pages/advance-elements/custom-picker.js"></script>
+<script type="text/javascript" src="{{asset('public/Backend')}}/assets/pages/advance-elements/custom-picker1.js"></script>
+<script type="text/javascript" src="{{asset('public/Backend')}}/assets/pages/advance-elements/custom-picker2.js"></script>
 
 
 
@@ -88,16 +90,11 @@
 <script src="https://cdn.jsdelivr.net/npm/uikit@3.14.3/dist/js/uikit-icons.min.js"></script>
 
 
-<!-- <script type="text/javascript" src="{{asset('public/Backend')}}/bower_components/select2/js/select2.full.min.js"></script>
 
-<script type="text/javascript" src="{{asset('public/Backend')}}/bower_components/bootstrap-multiselect/js/bootstrap-multiselect.js">
-</script>
-<script type="text/javascript" src="{{asset('public/Backend')}}/bower_components/multiselect/js/jquery.multi-select.js"></script>
-<script type="text/javascript" src="{{asset('public/Backend')}}/assets/js/jquery.quicksearch.js"></script>
-
-<script type="text/javascript" src="{{asset('public/Backend')}}/assets/pages/advance-elements/select2-custom.js"></script> -->
 
 <script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
+<script type="text/javascript" src="{{asset('public')}}/Backend/js/dtsel.js"></script>
 
 
 
@@ -108,6 +105,7 @@
    function courseFee(id)
    {
    	$("#course_id-"+id).on('change',function(){
+        $('#discount_ammount').val(0);
    		var id = $(this).val();
 
    		var presentValue = $("#main_fee").val();
@@ -415,6 +413,126 @@ else
         });
 
     });
+
+</script>
+
+<script type="text/javascript">
+    
+$(document).ready(function(){
+
+    $('#daily').hide();
+    $('#date_to_date').hide();
+    $('#date_to_date1').hide();
+    $('#monthly').hide();
+    $('#monthly1').hide();
+    $('#yearly').hide();
+
+    $("#report_type").on('change',function(){
+
+        var type = $(this).val();
+
+        // alert(type);
+
+        if(type == 'All')
+        {
+            $('#daily').hide();
+            $('#date_to_date').hide();
+            $('#date_to_date1').hide();
+            $('#monthly').hide();
+            $('#monthly1').hide();
+            $('#yearly').hide();
+        }
+        else if(type == 'Daily')
+        {
+            $('#daily').fadeIn();
+            $('#date_to_date').hide();
+            $('#date_to_date1').hide();
+            $('#monthly').hide();
+            $('#monthly1').hide();
+            $('#yearly').hide();
+        }
+        else if(type == 'Date_to_Date')
+        {
+            $('#daily').hide();
+            $('#date_to_date').fadeIn();
+            $('#date_to_date1').fadeIn();
+            $('#monthly').hide();
+            $('#monthly1').hide();
+            $('#yearly').hide();
+        }
+        else if(type == 'Monthly')
+        {
+            $('#daily').hide();
+            $('#date_to_date').hide();
+            $('#date_to_date1').hide();
+            $('#monthly').fadeIn();
+            $('#monthly1').fadeIn();
+            $('#yearly').hide();
+        }
+        else if(type == 'Yearly')
+        {
+            $('#daily').hide();
+            $('#date_to_date').hide();
+            $('#date_to_date1').hide();
+            $('#monthly').hide();
+            $('#monthly1').hide();
+            $('#yearly').fadeIn();
+        }
+
+    });
+
+});
+
+</script>
+
+
+
+<script type="text/javascript">
+    
+//     instance = new dtsel.DTS('input[name="dateTimePicker"]',  {
+//   showTime: true
+// });
+
+instance = new dtsel.DTS('input[id="dateTimePicker"]',  {
+  showTime: false,
+  showDate: true
+});
+
+instance = new dtsel.DTS('input[id="dateTimePicker"]',  {
+  dateFormat: "yyyy-mm-dd",
+})
+
+</script>
+<script type="text/javascript">
+    
+//     instance = new dtsel.DTS('input[name="dateTimePicker"]',  {
+//   showTime: true
+// });
+
+instance = new dtsel.DTS('input[id="dateTimePicker1"]',  {
+  showTime: false,
+  showDate: true
+});
+
+instance = new dtsel.DTS('input[id="dateTimePicker1"]',  {
+  dateFormat: "yyyy-mm-dd",
+})
+
+</script>
+<script type="text/javascript">
+    
+//     instance = new dtsel.DTS('input[name="dateTimePicker"]',  {
+//   showTime: true
+// });
+
+instance = new dtsel.DTS('input[id="dateTimePicker2"]',  {
+  showTime: false,
+  showDate: true
+});
+
+instance = new dtsel.DTS('input[id="dateTimePicker2"]',  {
+  dateFormat: "yyyy-mm-dd",
+})
 
 </script>
 

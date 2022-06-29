@@ -31,7 +31,7 @@ class studentCollectionController extends Controller
         // return $request->
 
         $insert = DB::table('student_collection')
-                  ->insert($request->except('_token','submit','total_due'));
+                  ->insertGetId($request->except('_token','submit','total_due'));
 
         if($insert)
         {
@@ -40,7 +40,7 @@ class studentCollectionController extends Controller
             DB::table('student_info')->where('id',$request->student_id)->update(['due'=>$request->due_ammount]);
             DB::table('student_info')->where('id',$request->student_id)->update(['paid'=>$paid_data]);
 
-            return redirect()->back()->with('success','Student Collection Successfully Done!');
+            return redirect('voucher/'.$insert.'/'.$request->student_id);
         }
         else
         {
@@ -94,6 +94,7 @@ class studentCollectionController extends Controller
     {
         $std_info = DB::table('student_collection')
                     ->where('student_id',$student_id)
+                    ->where('student_collection.id',$collection_id)
                     ->join('student_info','student_info.id','=','student_collection.student_id')
                     ->select('student_collection.*','student_info.name','student_info.total_fee','student_info.due','student_info.paid','student_info.unique_id','student_info.phone','student_info.upazila','student_info.district','student_info.adress')->first();
 
