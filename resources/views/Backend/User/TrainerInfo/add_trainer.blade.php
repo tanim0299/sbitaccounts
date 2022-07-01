@@ -81,6 +81,10 @@
                     <input type="text" name="designation" class="form-control" value="{{old('designation')}}">
                 </div>
                 <div class="input-single-box">
+                    <label>Trainer Salary</label>
+                    <input type="number" name="salary" class="form-control" value="{{old('salary')}}">
+                </div>
+                <div class="input-single-box">
                     <label>Adress</label>
                     <textarea class="form-control" name="adress"></textarea>
                 </div>

@@ -82,6 +82,10 @@
                     <input type="text" name="designation" class="form-control" value="{{$data->designation}}">
                 </div>
                 <div class="input-single-box">
+                    <label>Trainer Salary</label>
+                    <input type="number" name="salary" class="form-control" value="{{$data->salary}}">
+                </div>
+                <div class="input-single-box">
                     <label>Adress</label>
                     <textarea class="form-control" name="adress">{{$data->adress}}</textarea>
                 </div>

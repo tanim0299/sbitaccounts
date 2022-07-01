@@ -20,6 +20,7 @@ class trainerController extends Controller
         'trainer_name' => 'required',
         'phone' => 'required|unique:trainer_info',
         'designation' => 'required',
+        'salary' => 'required',
         // 'password_confirmation' => 'required|min:3',
     ]);
 
@@ -71,6 +72,7 @@ class trainerController extends Controller
         'trainer_name' => 'required',
         'phone' => 'required',
         'designation' => 'required',
+        'salary' => 'required',
         // 'password_confirmation' => 'required|min:3',
     ]);
 
@@ -118,9 +120,14 @@ class trainerController extends Controller
     {
 
         $trainer_check = DB::table('trainer_appoint')->where('trainer_id',$id)->get();
+        $trainer_check = DB::table('salary_info')->where('trainer_id',$id)->get();
         if(count($trainer_check) > 0)
         {
-            return redirect()->back()->with('error','This Student Have Trainer');
+            return redirect()->back()->with('error','This Trainer Have Student');
+        }
+        elseif(count($trainer_check1) > 0)
+        {
+            return redirect()->back()->with('error','This Trainer Have Salary Info');
         }
         else
         {

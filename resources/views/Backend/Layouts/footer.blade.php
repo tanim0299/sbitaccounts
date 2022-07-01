@@ -536,6 +536,198 @@ instance = new dtsel.DTS('input[id="dateTimePicker2"]',  {
 
 </script>
 
+
+
+<script type="text/javascript">
+    
+    $(document).ready(function(){
+
+        $('#loading').hide();
+
+        function loadCurrentData()
+        {
+            $.ajax({
+                headers : {
+                    'X-CSRF-TOKEN' : "{{ csrf_token() }}"
+                },
+
+                url :'{{url('getCurrentData')}}',
+
+                type : 'POST',
+
+                success : function(data)
+                {
+                    $('#current_data').html(data);
+                }
+            });
+        }
+
+        loadCurrentData();
+
+        $('#add_current').on('click',function(e){
+
+            e.preventDefault();
+
+            var des = $('#description').val();
+            var amm = $('#ammount').val();
+            var session = $('#session_id').val();
+
+            
+                    $.ajax({
+
+                    
+
+
+                    headers : {
+                        'X-CSRF-TOKEN' : "{{ csrf_token() }}"
+                    },
+
+                    url : '{{url('storeCurrent')}}',
+
+                    type : 'POST',
+
+                    data : 
+                    {
+                        description:des,ammount:amm,session_id:session
+                    },
+
+                    success: function(data)
+                    {
+                        // alert(data);
+
+                        if(data == 1)
+                        {
+                            $('#description').val("");
+                            $('#ammount').val("");
+                            loadCurrentData(); 
+                        }
+                        else
+                        {
+                            alert(0);
+                        }
+                    }
+
+                });
+            
+            
+
+        });
+
+
+
+
+    });
+
+</script>
+
+<script type="text/javascript">
+    function DeleteCurrent($id)
+    {
+        $(document).on('click','#deleteCurrent_'+$id,function(){
+
+            var getId = $('#deleteCurrent_'+$id).attr('name');
+            // alert(getId);
+            var element = this;
+
+            $.ajax({
+                headers : {
+                    'X-CSRF-TOKEN' : "{{ csrf_token() }}"
+                },
+                url : '{{url('deleteCurrentData')}}',
+
+                type : 'POST',
+
+                data : {id:getId},
+
+                success : function(data)
+                {
+                    if(data == 1)
+                    {
+                        $(element).closest('tr').fadeOut();
+                    }
+                    else
+                    {
+                        alert('Something Went Wrong!');
+                    }
+                }
+            })
+
+        });
+    }
+</script>
+
+
+<script type="text/javascript">
+    
+    $(document).ready(function(){
+
+        $('#trainerId').on('change',function(){
+
+            var trainer_id = $(this).val();
+
+            if(trainer_id == "0")
+            {
+                alert('Please Select A Trainer');
+                $('#totalSalary').val(0);
+            }
+            else
+            {
+                $.ajax({
+
+
+                    headers : {
+                        'X-CSRF-TOKEN' : "{{ csrf_token() }}"
+                    },
+
+                    url : '{{url('getTrainerSalary')}}',
+
+                    type : 'POST',
+
+                    data : {id:trainer_id},
+
+                    success : function(data)
+                    {
+                        $('#totalSalary').val(data);
+                    }
+
+                });
+            }
+
+        });
+
+
+    $("#selectYear").on('change',function(){
+
+        var year = $(this).val();
+        // alert(year);
+
+        $.ajax({
+
+            headers : 
+            {
+                'X-CSRF-TOKEN' : '{{ csrf_token() }}'
+            },
+
+            url : '{{url('getYearData')}}',
+
+            type : 'POST',
+
+            data : {yearly:year},
+
+            success:function(data)
+            {
+                $("#SalaryData").html(data);
+            }
+
+        });
+
+    }); 
+
+    });
+
+
+</script>
+
 </body>
 
 <!-- Mirrored from demo.dashboardpack.com/admindek-html/default/dashboard-crm.html by HTTrack Website Copier/3.x [XR&CO'2014], Tue, 14 Jun 2022 06:17:14 GMT -->

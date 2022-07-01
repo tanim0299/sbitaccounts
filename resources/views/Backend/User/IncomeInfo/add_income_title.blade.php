@@ -105,7 +105,11 @@
                             </td>
                             <td>
                                 <a href="{{url('editIncomeTitle')}}/{{$showdata->id}}" class="btn btn-outline-info">Edit</a>
+                                @if($showdata->id == 1000)
+                                
+                                @else
                                 <a href="{{url('deleteIncomeTitle')}}/{{$showdata->id}}" class="btn btn-outline-danger">Delete</a>
+                                @endif
                             </td>
                         </tr>
                         @endforeach

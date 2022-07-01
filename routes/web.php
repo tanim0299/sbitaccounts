@@ -145,3 +145,18 @@ Route::post('/showExpenseReport',[App\Http\Controllers\expenseController::class,
 Route::get('/statement',[App\Http\Controllers\statementController::class, 'index']);
 Route::post('/showStatement',[App\Http\Controllers\statementController::class, 'showStatement']);
 
+
+
+Route::get('/makeBill',[App\Http\Controllers\billController::class, 'index']);
+Route::post('/getCurrentData',[App\Http\Controllers\billController::class, 'getCurrentData']);
+Route::post('/storeCurrent',[App\Http\Controllers\billController::class, 'storeCurrent']);
+Route::post('/deleteCurrentData',[App\Http\Controllers\billController::class, 'deleteCurrentData']);
+Route::post('/invoice_store',[App\Http\Controllers\billController::class, 'invoice_store']);
+
+//salry info
+Route::get('/giveSalary',[App\Http\Controllers\salaryController::class, 'index']);
+Route::post('/getTrainerSalary',[App\Http\Controllers\salaryController::class, 'getTrainerSalary']);
+Route::post('/salaryStore',[App\Http\Controllers\salaryController::class, 'salaryStore']);
+Route::get('/viewEmpSalary',[App\Http\Controllers\salaryController::class, 'viewEmpSalary']);
+Route::post('/getYearData',[App\Http\Controllers\salaryController::class, 'getYearData']);
+Route::get('/deleteSalary/{id}',[App\Http\Controllers\salaryController::class, 'deleteSalary']);

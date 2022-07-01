@@ -157,6 +157,21 @@ h3.m-b-0.f-w-700.text-white {
 .navbar-logo {
     overflow: hidden;
 }
+.trainer_single-box {
+    border: 1px solid lightgray;
+}
+
+.trainer_image img {
+    height: 93px;
+    width: 93px;
+    border-radius: 102px;
+}
+
+.box-header.bg-success {
+    padding-left: 11px;
+    padding: 9px 15px;
+    padding-bottom: 0px !important;
+}
 </style>
 <body>
 
@@ -289,6 +304,8 @@ h3.m-b-0.f-w-700.text-white {
 <span class="pcoded-mtext">Dashboard</span>
 </a>
 </li>
+
+@if($adminInfo->type == 'developer')
 <li class="pcoded-hasmenu {{request()->Is('addMainMenu*') ? 'active' : ''}}{{request()->Is('addSubMenu*') ? 'active' : ''}}">
 <a href="javascript:void(0)" class="waves-effect waves-dark">
 <span class="pcoded-micon">
@@ -310,6 +327,7 @@ h3.m-b-0.f-w-700.text-white {
 </li>
 </ul>
 </li>
+@endif
 </ul>
 <div class="pcoded-navigation-label">Others Links</div>
 <ul class="pcoded-item pcoded-left-item">
@@ -326,7 +344,8 @@ $sub_menu = DB::table('sub_menu')
 <li class="pcoded-hasmenu" id="main_link">
 <a href="javascript:void(0)" class="waves-effect waves-dark">
 <span class="pcoded-micon">
-<i class="feather icon-box"></i>
+<i class="feather icon-layers"></i>
+<!-- <i class="fas fa-folder"></i> -->
 </span>
 <span class="pcoded-mtext">{{$show_mainmenu->link_name}}</span>
 </a>

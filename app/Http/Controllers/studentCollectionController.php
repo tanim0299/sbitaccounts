@@ -35,6 +35,20 @@ class studentCollectionController extends Controller
 
         if($insert)
         {
+            $student_name = DB::table('student_info')
+                            ->where('id',$request->student_id)
+                            ->select('student_info.name')
+                            ->first();
+            $income_data = DB::table('income_info')
+                           ->insert([
+                            'date'=>$request->date,
+                            'income_title_id'=>1000,
+                            'recived_from'=>$student_name->name,
+                            'ammount'=>$request->collection_ammount,
+                            'admin_id'=>$request->admin_id,
+                           ]);
+
+
             $paid_data = DB::table('student_collection')->where('student_id',$request->student_id)->sum('collection_ammount');
 
             DB::table('student_info')->where('id',$request->student_id)->update(['due'=>$request->due_ammount]);

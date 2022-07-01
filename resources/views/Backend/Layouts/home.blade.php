@@ -10,6 +10,8 @@
 <div class="d-inline">
 <h5>Dashboard</h5>
 <span>This Is SBIT Dashboard</span>
+
+<!-- <button onclick="javascript:toggleFullScreen()" class="btn btn-success">FFF</button> -->
 <!-- <input id="dateTimePicker" /> -->
 </div>
 </div>

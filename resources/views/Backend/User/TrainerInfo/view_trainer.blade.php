@@ -52,6 +52,7 @@
                             <th>Sl</th>
                             <th>Name</th>
                             <th>Designation</th>
+                            <th>Salary</th>
                             <th>Course</th>
                             <th>Phone</th>
                             <th>Adress</th>
@@ -66,6 +67,7 @@
                             <td>{{$sl++}}</td>
                             <td>{{$showdata->trainer_name}}</td>
                             <td>{{$showdata->designation}}</td>
+                            <td>{{$showdata->salary}}</td>
                             <td>{{$showdata->course_name}}</td>
                             <td>{{$showdata->phone}}</td>
                             <td>{{$showdata->adress}}</td>
