@@ -14,7 +14,8 @@ use Illuminate\Support\Facades\Route;
 */
 
 Route::get('/', function () {
-    return view('auth.login');
+    // return view('auth.login');
+    return redirect('/login');
 });
 
 //tanim
@@ -152,6 +153,9 @@ Route::post('/getCurrentData',[App\Http\Controllers\billController::class, 'getC
 Route::post('/storeCurrent',[App\Http\Controllers\billController::class, 'storeCurrent']);
 Route::post('/deleteCurrentData',[App\Http\Controllers\billController::class, 'deleteCurrentData']);
 Route::post('/invoice_store',[App\Http\Controllers\billController::class, 'invoice_store']);
+Route::get('/viewInvoice',[App\Http\Controllers\billController::class, 'viewInvoice']);
+Route::get('/getInvoice/{id}/{invoice_id}',[App\Http\Controllers\billController::class, 'getInvoice']);
+Route::get('/delete_invoice/{id}/{invoice_id}',[App\Http\Controllers\billController::class, 'delete_invoice']);
 
 //salry info
 Route::get('/giveSalary',[App\Http\Controllers\salaryController::class, 'index']);

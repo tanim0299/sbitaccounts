@@ -25,4 +25,8 @@ class HomeController extends Controller
     {
         return view('Backend.Layouts.home');
     }
+    public function login()
+    {
+        return view('auth.login');
+    }
 }

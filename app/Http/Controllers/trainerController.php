@@ -8,6 +8,10 @@ use App\Models\course_info;
 
 class trainerController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $course = course_info::all();

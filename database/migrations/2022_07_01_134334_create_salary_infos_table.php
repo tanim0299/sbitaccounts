@@ -23,6 +23,7 @@ class CreateSalaryInfosTable extends Migration
             $table->double('total_salary',10,2);
             $table->double('ammount',10,2);
             $table->longText('comment')->nullable();
+            $table->integer('expense_id',20)->nullable();
             $table->timestamps();
         });
     }

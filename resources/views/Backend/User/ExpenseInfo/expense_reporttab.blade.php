@@ -4,7 +4,8 @@
 	<meta charset="utf-8">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>Expense Report</title>
-	<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
+	<link rel="stylesheet" type="text/css" href="{{asset('public/Backend')}}/bower_components/bootstrap/css/bootstrap.min.css">
+
 </head>
 <style type="text/css">
 	body
@@ -93,7 +94,21 @@ th {
 		 				<tr>
 		 					<td>{{$sl++}}</td>
 		 					<td>{{$showdata->date}}</td>
-		 					<td>{{$showdata->expense_title}}</td>
+		 					@php
+                            if($showdata->expense_title == 'Salary Expense')
+                            {
+                                $details = DB::table('salary_info')
+                                           ->join('trainer_info','salary_info.trainer_id','=','trainer_info.id')
+                                           ->where('salary_info.expense_id',$showdata->id)
+                                           ->select('salary_info.month','salary_info.year','trainer_info.trainer_name')
+                                           ->first();
+                            }
+                            @endphp
+                            @if($details)
+                            <td>{{$showdata->expense_title}} ( {{$details->trainer_name}} - {{$details->month}} - {{$details->year}} )</td>
+                            @else
+                            <td>{{$showdata->expense_title}}</td>
+                            @endif
 		 					<td>{{$showdata->details}}</td>
 		 					<td>{{$showdata->ammount}}/-</td>
 		 				</tr>

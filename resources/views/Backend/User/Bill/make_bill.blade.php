@@ -8,10 +8,10 @@
 <div class="page-header-title">
 <!-- <i class="feather icon-home bg-c-blue"></i> -->
 <div class="d-inline">
-<h5>Create Bill</h5>
+<h5>Create Invoice</h5>
 <!-- <span>This Is SBIT Dashboard</span> -->
 <div class="links" style="margin-top: 20px;">
-    <a href="{{url('viewBill')}}" class="btn btn-outline-info">View Bill</a>
+    <a href="{{url('viewInvoice')}}" class="btn btn-outline-info">View Invoice</a>
 </div>
 </div>
 </div>
@@ -29,7 +29,7 @@
  <div class="form-body">
     <div class="card">
         <div class="card-header">
-             <h5>Create Bill</h5>
+             <h5>Create Invoice</h5>
         </div>
         <div class="card-block">
             @if ($errors->any())

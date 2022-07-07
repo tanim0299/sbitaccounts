@@ -9,6 +9,10 @@ use NumberToWords\NumberToWords;
 
 class expenseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function addExpenseTitle()
     {
         $data = expensetitle_info::all();
@@ -133,6 +137,8 @@ class expenseController extends Controller
     }
     public function deleteExpense($id)
     {
+        DB::table('salary_info')->where('expense_id',$id)->delete();
+
         $delete = DB::table('expense_infos')->where('id',$id)->delete();
         if($delete)
         {

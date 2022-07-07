@@ -11,6 +11,10 @@ use NumberToWords\NumberToWords;
 
 class incomeController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $data = incometitle_info::get();
@@ -58,6 +62,7 @@ class incomeController extends Controller
 
     public function delete($id)
     {
+
         $delete = incometitle_info::find($id)->delete();
         if($delete)
         {
@@ -163,6 +168,38 @@ class incomeController extends Controller
     }
     public function delete_income($id)
     {
+
+        $studentinfo = DB::table('student_collection')
+                       ->where('income_id',$id)
+                       ->first();
+
+        $get_data = DB::table('student_info')
+                        ->where('id',$studentinfo->student_id)
+                        ->first();
+        $paid_ammount = $get_data->paid;
+        $due_ammount = $get_data->due;
+
+        $get_presentammount = DB::table('student_collection')
+                              ->where('id',$studentinfo->id)
+                              ->first();
+
+        $collection_ammount = $get_presentammount->collection_ammount;
+
+        // return $collection_ammount;
+
+        $newPaid_ammount = $paid_ammount - $collection_ammount;
+
+        $newDue_ammount = $due_ammount + $collection_ammount;
+
+        $setdata = DB::table('student_info')->where('id',$studentinfo->student_id)->update(['paid'=>$newPaid_ammount,'due'=>$newDue_ammount]);
+
+        $delete_student_collection = DB::table('student_collection')->where('income_id',$id)->delete();
+
+
+
+
+
+
         $delete = income_info::find($id)->delete();
         if($delete)
         {

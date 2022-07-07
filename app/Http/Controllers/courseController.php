@@ -8,6 +8,10 @@ use App\Models\course_info;
 
 class courseController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         return view('Backend.User.CourseInfo.add_course');

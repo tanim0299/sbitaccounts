@@ -63,7 +63,10 @@
                     <select class="form-control" name="expense_title_id">
                         @if($expense_title)
                         @foreach($expense_title as $show_title)
+                        @if($show_title->id == 1000)
+                        @else
                         <option value="{{$show_title->id}}">{{$show_title->expense_title}}</option>
+                        @endif
                         @endforeach
                         @endif
                     </select>

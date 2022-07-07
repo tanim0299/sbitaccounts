@@ -96,6 +96,9 @@
 
 <script type="text/javascript" src="{{asset('public')}}/Backend/js/dtsel.js"></script>
 
+<script src="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.js"></script>
+
+
 
 
 <!-- <script src="https://code.jquery.com/jquery-3.6.0.js" integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk=" crossorigin="anonymous"></script> -->
@@ -726,6 +729,13 @@ instance = new dtsel.DTS('input[id="dateTimePicker2"]',  {
     });
 
 
+</script>
+
+
+<script type="text/javascript">
+    $(document).ready(function() {
+  $('#description').summernote();
+});
 </script>
 
 </body>

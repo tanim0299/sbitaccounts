@@ -7,6 +7,10 @@ use DB;
 
 class statementController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         return view('Backend.User.Statement.statement');

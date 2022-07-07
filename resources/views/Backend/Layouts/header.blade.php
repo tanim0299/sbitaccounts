@@ -19,7 +19,7 @@
 <meta name="keywords" content="flat ui, admin Admin , Responsive, Landing, Bootstrap, App, Template, Mobile, iOS, Android, apple, creative app">
 <meta name="author" content="colorlib" />
 
-<link rel="icon" href="{{asset('public/Backend')}}/assets/images/favicon.ico" type="image/x-icon">
+<link rel="icon" href="{{asset('public/Backend')}}/assets/images/favicon.jpg" type="image/x-icon">
 
 <link href="https://fonts.googleapis.com/css?family=Open+Sans:300,400,600,700,800" rel="stylesheet">
 <link href="https://fonts.googleapis.com/css?family=Quicksand:500,700" rel="stylesheet">
@@ -67,6 +67,9 @@
 <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
 
 <link rel="stylesheet" type="text/css" href="{{asset('public')}}/Backend/css/dtsel.css">
+
+<link href="https://cdn.jsdelivr.net/npm/summernote@0.8.18/dist/summernote.min.css" rel="stylesheet">
+
 
 
 

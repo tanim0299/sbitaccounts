@@ -7,6 +7,10 @@ use DB;
 
 class salaryController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $month = date('m');
@@ -32,28 +36,44 @@ class salaryController extends Controller
             'ammount'=>'required',
         ]);
 
-        $insert = DB::table('salary_info')
-                  ->insert($request->except('_token','submit','admin_id'));
+        $checked = DB::table('salary_info')
+                   ->where('trainer_id',$request->trainer_id)
+                   ->where('month',$request->month)
+                   ->where('year',$request->year)
+                   ->get();
 
-        if($insert)
+        if(count($checked) > 0)
         {
-
-            $expense_info = DB::table('expense_infos')
-                            ->insert([
-                                'date'=>$request->date,
-                                'expense_title_id'=>1000,
-                                'ammount'=>$request->ammount,
-                                'details'=>$request->comment,
-                                'admin_id'=>$request->admin_id,
-                            ]);
-
-
-            return redirect()->back()->with('success','Data Insert Successfully');
+            return redirect()->back()->with('error','Your Have Already Give Him Salary In This Year');
         }
         else
         {
-            return redirect()->back()->with('error','Data Insert Unsuccessfull!');
+            $insert = DB::table('salary_info')
+                  ->insertGetId($request->except('_token','submit','admin_id'));
+
+            if($insert)
+            {
+
+                $expense_info = DB::table('expense_infos')
+                                ->insertGetId([
+                                    'date'=>$request->date,
+                                    'expense_title_id'=>1000,
+                                    'ammount'=>$request->ammount,
+                                    'details'=>$request->comment,
+                                    'admin_id'=>$request->admin_id,
+                                    'salary_id'=>$insert,
+                                ]);
+                DB::table('salary_info')->where('id',$insert)->update(['expense_id'=>$expense_info]);
+
+
+                return redirect()->back()->with('success','Data Insert Successfully');
+            }
+            else
+            {
+                return redirect()->back()->with('error','Data Insert Unsuccessfull!');
+            }
         }
+
     }
 
     public function viewEmpSalary()
@@ -85,6 +105,7 @@ class salaryController extends Controller
     }
     public function deleteSalary($id)
     {
+        $deleteExpense = DB::table('expense_infos')->where('salary_id',$id)->delete();
         $delete = DB::table('salary_info')->where('id',$id)->delete();
         if($delete)
         {

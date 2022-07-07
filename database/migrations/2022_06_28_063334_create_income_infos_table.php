@@ -22,6 +22,7 @@ class CreateIncomeInfosTable extends Migration
             $table->double('ammount',10,2);
             $table->longText('details')->nullable();
             $table->string('admin_id',10);
+            $table->integer('std_collection_id',10)->nullable();
             $table->timestamps();
         });
     }

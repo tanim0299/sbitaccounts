@@ -3,7 +3,7 @@
 @foreach($data as $showdata)
 <tr>
     <td>{{$sl++}}</td>
-    <td>{{$showdata->description}}</td>
+    <td>{!!$showdata->description!!}</td>
     <td>{{$showdata->ammount}}</td>
     <td>
         <button class="btn btn-outline-danger" id="deleteCurrent_{{$showdata->id}}" name="{{$showdata->id}}" onclick="DeleteCurrent({{$showdata->id}})">Remove</button>

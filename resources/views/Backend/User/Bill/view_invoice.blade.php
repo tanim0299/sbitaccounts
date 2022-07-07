@@ -9,10 +9,10 @@
 <div class="page-header-title">
 <!-- <i class="feather icon-home bg-c-blue"></i> -->
 <div class="d-inline">
-<h5>View Expense</h5>
+<h5>View Invoice</h5>
 <!-- <span>This Is SBIT Dashboard</span> -->
 <div class="links" style="margin-top: 20px;">
-    <a href="{{url('/add_expense')}}" class="btn btn-outline-info">Add Expense</a>
+    <a href="{{url('makeBill')}}" class="btn btn-outline-info">Add Invoice</a>
 </div>
 </div>
 </div>
@@ -30,7 +30,7 @@
  <div class="form-body">
     <div class="card">
         <div class="card-header">
-             <h5>View Expense</h5>
+             <h5>View Invoice</h5>
         </div>
         <div class="card-block">
             @if(Session::get('success'))
@@ -51,8 +51,9 @@
                         <tr>
                             <th>Sl</th>
                             <th>Date</th>
-                            <th>Expense Type</th>
-                            <th>Ammount</th>
+                            <th>Invoice ID</th>
+                            <th>Title</th>
+                            <th>Client Name</th>
                             <th>Action</th>
                         </tr>
                     </thead>
@@ -62,25 +63,12 @@
                         <tr>
                             <td>{{$sl++}}</td>
                             <td>{{$showdata->date}}</td>
-                            @php
-                            if($showdata->expense_title == 'Salary Expense')
-                            {
-                                $details = DB::table('salary_info')
-                                           ->join('trainer_info','salary_info.trainer_id','=','trainer_info.id')
-                                           ->where('salary_info.expense_id',$showdata->id)
-                                           ->select('salary_info.month','salary_info.year','trainer_info.trainer_name')
-                                           ->first();
-                            }
-                            @endphp
-                            @if($details)
-                            <td>{{$showdata->expense_title}} ( {{$details->trainer_name}} - {{$details->month}} - {{$details->year}} )</td>
-                            @else
-                            <td>{{$showdata->expense_title}}</td>
-                            @endif
-                            <td>{{$showdata->ammount}}</td>
+                            <td>{{$showdata->invoice_id}}</td>
+                            <td>{{$showdata->title}}</td>
+                            <td>{{$showdata->client_name}}</td>
                             <td>
-                                <a href="{{url('edit_expense')}}/{{$showdata->id}}" class="btn btn-outline-info">Edit</a>
-                                <a href="{{url('deleteExpense')}}/{{$showdata->id}}" class="btn btn-outline-danger">Delete</a>
+                                <a target="_blank" href="{{url('/getInvoice')}}/{{$showdata->id}}/{{$showdata->invoice_id}}" class="btn btn-outline-info">Get Invoice</a>
+                                <a href="{{url('/delete_invoice')}}/{{$showdata->id}}/{{$showdata->invoice_id}}" class="btn btn-outline-danger">Delete</a>
                             </td>
                         </tr>
                         @endforeach

@@ -9,6 +9,10 @@ use App\Models\sub_menu;
 
 class subMenuController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $main_menu = main_menu::all()->where('status','1');

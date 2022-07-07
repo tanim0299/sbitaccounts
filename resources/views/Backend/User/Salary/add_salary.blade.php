@@ -28,7 +28,7 @@
  <!-- //body content goes here -->
  <div class="form-body">
     <div class="card">
-        <div class="card-header">
+        <div class="card-header" id="">
              <h5>Add Employee Salary</h5>
         </div>
         <div class="card-block">
@@ -59,8 +59,19 @@
                     <input name="date" class="form-control" type="text" value="@php echo date('Y-m-d') @endphp" required id="dateTimePicker">
                 </div>
                 <div class="input-single-box">
+                    <label>Select Employee</label>
+                    <select class="form-control" name="trainer_id" id="trainerId" required>
+                        <option value="0">Select One</option>
+                        @if($trainer)
+                        @foreach($trainer as $show_trainer)
+                        <option value="{{$show_trainer->id}}">{{$show_trainer->trainer_name}} ({{$show_trainer->phone}})</option>
+                        @endforeach
+                        @endif
+                    </select>
+                </div> 
+                <div class="input-single-box" id="SalaryMonthData">
                     <label>Month</label>
-                    <select class="form-control" name="month">
+                    <select class="form-control" name="month" id="salaryMonth">
                         <option value="January">January</option>
                         <option value="February">February</option>
                         <option value="March">March</option>
@@ -77,19 +88,9 @@
                 </div>
                 <div class="input-single-box">
                     <label>Year</label>
-                    <input type="text" name="year" class="form-control" value="@php echo date('Y'); @endphp">
+                    <input type="text" name="year" class="form-control" value="@php echo date('Y'); @endphp" id="salaryYear">
                 </div>
-                <div class="input-single-box">
-                    <label>Select Employee</label>
-                    <select class="form-control" name="trainer_id" id="trainerId" required>
-                        <option value="0">Select One</option>
-                        @if($trainer)
-                        @foreach($trainer as $show_trainer)
-                        <option value="{{$show_trainer->id}}">{{$show_trainer->trainer_name}} ({{$show_trainer->phone}})</option>
-                        @endforeach
-                        @endif
-                    </select>
-                </div>
+                
                 <div class="input-single-box">
                     <label>Salary</label>
                     <input type="text" name="total_salary" class="form-control" value="{{old('total_salary')}}" readonly id="totalSalary">

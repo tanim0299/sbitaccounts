@@ -22,6 +22,7 @@ class CreateStudentCollectionsTable extends Migration
             $table->double('due_ammount',10,2);
             $table->string('admin_id');
             $table->longText('comment')->nullable();
+            $table->integer('income_id',20)->nullable();
             $table->timestamps();
         });
     }

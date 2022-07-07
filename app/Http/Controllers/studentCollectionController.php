@@ -9,6 +9,10 @@ use NumberToWords\NumberToWords;
 
 class studentCollectionController extends Controller
 {
+    public function __construct()
+    {
+        $this->middleware('auth');
+    }
     public function index()
     {
         $student = DB::table('student_info')
@@ -40,13 +44,16 @@ class studentCollectionController extends Controller
                             ->select('student_info.name')
                             ->first();
             $income_data = DB::table('income_info')
-                           ->insert([
+                           ->insertGetId([
                             'date'=>$request->date,
                             'income_title_id'=>1000,
                             'recived_from'=>$student_name->name,
                             'ammount'=>$request->collection_ammount,
                             'admin_id'=>$request->admin_id,
+                            'std_collection_id'=>$insert,
                            ]);
+
+            DB::table('student_collection')->where('id',$insert)->update(['income_id'=>$income_data]);
 
 
             $paid_data = DB::table('student_collection')->where('student_id',$request->student_id)->sum('collection_ammount');
@@ -72,7 +79,6 @@ class studentCollectionController extends Controller
     }
     public function delete($id,$student_id)
     {
-        // return $id;
         $get_data = DB::table('student_info')
                         ->where('id',$student_id)
                         ->first();
@@ -94,6 +100,8 @@ class studentCollectionController extends Controller
         $setdata = DB::table('student_info')->where('id',$student_id)->update(['paid'=>$newPaid_ammount,'due'=>$newDue_ammount]);
 
         $delete = DB::table('student_collection')->where('id',$id)->delete();
+
+        DB::table('income_info')->where('std_collection_id',$id)->delete();
 
         if($delete)
         {
