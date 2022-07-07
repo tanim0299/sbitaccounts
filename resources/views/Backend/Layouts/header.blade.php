@@ -189,7 +189,7 @@ h3.m-b-0.f-w-700.text-white {
 <nav class="navbar header-navbar pcoded-header">
 <div class="navbar-wrapper">
 <div class="navbar-logo">
-<a href="{{url('/home')}}">
+<a href="{{url('/dashboard')}}">
 <img class="img-fluid" src="{{asset('public/public/Backend')}}/images/logo.png" alt="Theme-Logo" />
 </a>
 <a class="mobile-menu" id="mobile-collapse" href="#!">
@@ -299,8 +299,8 @@ h3.m-b-0.f-w-700.text-white {
 <div class="pcoded-inner-navbar main-menu">
 <div class="pcoded-navigation-label">Navigation</div>
 <ul class="pcoded-item pcoded-left-item">
-<li class="{{request()->Is('home*') ? 'active' : ''}}">
-<a href="{{url('/home')}}" class="waves-effect waves-dark">
+<li class="{{request()->Is('dashboard*') ? 'active' : ''}}">
+<a href="{{url('/dashboard')}}" class="waves-effect waves-dark">
 <span class="pcoded-micon">
 <i class="feather icon-home"></i>
 </span>

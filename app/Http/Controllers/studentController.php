@@ -262,7 +262,7 @@ class studentController extends Controller
 
     public function completeCourse($id,$course_id)
     {
-        $complete_date = date('d/m/Y');
+        $complete_date = date('Y-m-d');
         $update = DB::table('student_course_info')
                   ->where('student_id',$id)
                   ->where('course_id',$course_id)
