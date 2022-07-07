@@ -124,7 +124,7 @@ class trainerController extends Controller
     {
 
         $trainer_check = DB::table('trainer_appoint')->where('trainer_id',$id)->get();
-        $trainer_check = DB::table('salary_info')->where('trainer_id',$id)->get();
+        $trainer_check1 = DB::table('salary_info')->where('trainer_id',$id)->get();
         if(count($trainer_check) > 0)
         {
             return redirect()->back()->with('error','This Trainer Have Student');

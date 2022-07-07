@@ -137,7 +137,12 @@ class expenseController extends Controller
     }
     public function deleteExpense($id)
     {
-        DB::table('salary_info')->where('expense_id',$id)->delete();
+        $expense_check = DB::table('expense_infos')->where('id',$id)->first();
+
+        if($expense_check->salary_id == 1000)
+        {
+            DB::table('salary_info')->where('expense_id',$id)->delete();
+        }
 
         $delete = DB::table('expense_infos')->where('id',$id)->delete();
         if($delete)
