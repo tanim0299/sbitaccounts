@@ -355,9 +355,11 @@ div#wrap-box {
 										<input type="text" name="" readonly class="form-control" value="{{$data->type}}">
 									</div>
 								</div>
+								@if(file_exists($data->image))
 								<div class="std_image">
 									<img src="{{asset('public/public/Backend')}}/images/studentImage/{{$data->image}}" class="img-fluid">
-								</div>
+								</div
+								@endif
 							</div>
 							<div class="box">
 								<i class="feather icon-user"></i> <span>Personal Information</span>

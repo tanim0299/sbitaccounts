@@ -56,7 +56,11 @@
                 <div class="row">
                     <div class="col-6">
                         <div class="profile">
+                            @if(file_exists($data->image))
                             <img src="{{asset('public/public/Backend')}}/Images/studentImage/{{$data->image}}" height="180px" width="180px" style="border-radius:100px;">
+                            @else
+                            <img src="{{asset('public')}}/images/avatar.png" height="180px" width="180px" style="border-radius:100px;">
+                            @endif
                         </div>
                         <div class="student_info">
                             <div class="name">

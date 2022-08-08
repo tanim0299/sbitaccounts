@@ -158,6 +158,7 @@ class studentController extends Controller
             'discount'=>$request->discount,
             'discount_per'=>$request->discount_per,
             'total_fee'=>$request->total_fee,
+            'due'=>$request->total_fee,
             'join_date'=>$request->join_date,
             'class_time'=>$request->class_time,
             'admin_id'=>$request->admin_id,

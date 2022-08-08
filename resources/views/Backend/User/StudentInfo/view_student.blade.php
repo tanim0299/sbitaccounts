@@ -113,7 +113,11 @@
                             <td><div style="font-size: 20px;" class="badge badge-danger">{{$showdata->due}}</div></td>
                             <td>{{$showdata->join_date}}</td>
                             <td>{{$showdata->class_time}}</td>
-                            <td><img src="{{asset('public/public/Backend')}}/Images/studentImage/{{$showdata->image}}" height="70px" width="70px" style="border-radius:100px;"></td>
+                            <td>
+                                @if(file_exists($showdata->image))
+                                <img src="{{asset('public/public/Backend')}}/Images/studentImage/{{$showdata->image}}" height="70px" width="70px" style="border-radius:100px;">
+                                @endif
+                            </td>
                             <td>
                                 <a target="blank" href="{{url('showForm')}}/{{$showdata->id}}" class="btn btn-outline-secondary">Show Form</a>
                                 <a href="{{url('editStudent')}}/{{$showdata->id}}" class="btn btn-outline-info">Edit</a>
